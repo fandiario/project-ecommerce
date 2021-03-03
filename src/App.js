@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import {BrowserRouter, Switch, Route} from "react-router-dom"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Navbar from "./Components/Navbar"
+import Footer from "./Components/Footer"
+
+import LandingPage from "./Pages/LandingPage"
+import Register from "./Pages/Register"
+import DetailProduct from "./Pages/DetailProduct"
+
+
+// CSS 
+import "./Supports/Stylesheets/Utils.css"
+import "./Supports/Stylesheets/LandingPage.css"
+import "./Supports/Stylesheets/DetailProduct.css"
+
+
+class App extends React.Component {
+  render () {
+    return (
+      <div>
+        <BrowserRouter>
+          
+          <Navbar></Navbar>
+
+          <Switch>
+            <Route exact path="/" component={LandingPage}></Route>
+            <Route path="/register" component={Register}></Route>
+            <Route path="/detail-product/1" component={DetailProduct}></Route>
+          </Switch>
+  
+          <Footer></Footer>
+
+        </BrowserRouter>
+        
+      </div>
+    )
+  }
 }
 
 export default App;

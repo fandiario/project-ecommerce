@@ -1,0 +1,136 @@
+:root {
+    --primary : #433520; 
+    --secondary : #fde8cd; 
+    --third: #95afc0;
+    --dark: #353b48;
+    --light:#f5f6fa;
+    --danger: #b71540;
+}
+
+/* Background-Color */
+.furniture-bg-primary {
+    background-color: var(--primary);
+}
+
+.furniture-bg-secondary {
+    background-color: var(--secondary);
+}
+
+.furniture-bg-third {
+    background-color: var(--third);
+}
+
+.furniture-bg-dark {
+    background-color: var(--dark);
+}
+
+.furniture-bg-light {
+    background-color: var(--light);
+}
+
+.furniture-bg-danger {
+    background-color: var(--danger);
+}
+
+
+/* Font-Color */
+.furniture-primary {
+    color: var (var(--primary))
+}
+
+.furniture-secondary {
+    color: var (var(--secondary))
+}
+
+.furniture-third {
+    color: var (var(--third))
+}
+
+.furniture-dark {
+    color: var (var(--dark))
+}
+
+.furniture-light {
+    color: var (var(--light))
+}
+
+.furniture-danger {
+    color: var (var(--danger))
+}
+
+/* Font-Size */
+.furniture-font-size-10 {
+    font-size: 10px;
+}
+
+.furniture-font-size-12 {
+    font-size: 12px;
+}
+
+.furniture-font-size-14 {
+    font-size: 14px;
+}
+
+.furniture-font-size-16 {
+    font-size: 16px;
+}
+
+.furniture-font-size-18 {
+    font-size: 18px;
+}
+
+.furniture-font-size-20 {
+    font-size: 20px;
+}
+
+.furniture-font-size-25 {
+    font-size: 25px;
+}
+
+.furniture-font-size-30 {
+    font-size: 30px;
+}
+
+.furniture-font-size-35 {
+    font-size: 35px;
+}
+
+
+/* Border */
+.furniture-border-dark {
+    border: 2px solid var(--dark);
+}
+
+
+/* Link */
+.furniture-link {
+    color: inherit;
+}
+
+.furniture-link:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* Margin */
+.furniture-margin-top {
+    margin-top: 1em;
+}
+
+.furniture-margin-bottom {
+    margin-bottom: 1em;
+}
+
+
+/* Button */
+.furniture-bt-primary {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+.furniture-bt-danger {
+    background-color: var(--danger);
+    color: var(--light);
+}
+
