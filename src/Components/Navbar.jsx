@@ -1,10 +1,16 @@
-import React, {useState} from "react"
+import React from "react"
 import Axios from "axios"
+import {Link} from "react-router-dom" 
 import linkAPI from "../Supports/Constants/LinkAPI"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser,faSearch, faShoppingCart, faBars} from '@fortawesome/free-solid-svg-icons'
-import { Modal, ModalHeader, ModalBody } from 'reactstrap'
+
+
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import 
+    { 
+        faUser,faSearch, faShoppingCart, faBars, faCog, faUserPlus, faSignInAlt, faSignOutAlt
+    } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -39,7 +45,7 @@ class Navbar extends React.Component {
     }
 
     checkEmailPhone = () => {
-        // Check Email and Phone
+        // Check Phone
         let loginEmailPhone = this.refs.emailPhoneLogin.value
 
         if (loginEmailPhone[0] >= 0) {
@@ -48,7 +54,7 @@ class Navbar extends React.Component {
             .then ((res) => {
                 if (res.data.length === 1) {
                     this.setState ({emailPhoneValid : true})
-                    this.setState ({errLoginEmailPhone: "null"})
+                    this.setState ({errLoginEmailPhone: null})
 
                 } else {
                     this.setState ({errLoginEmailPhone: "Phone Number isn't found"})
@@ -60,7 +66,7 @@ class Navbar extends React.Component {
             })
 
         } else {
-
+            // Check Email 
             Axios.get (linkAPI + "?email=" + loginEmailPhone) 
 
             .then ((res) => {
@@ -114,11 +120,16 @@ class Navbar extends React.Component {
             .then ((res) => {
                 localStorage.setItem("id", res.data[0].id)
                 console.log (res.data)
+                this.setState ({showModal: false})
+                window.location = "/"
             })
 
             .catch ((err)=> {
                 console.log (err)
             })
+        } else {
+            alert ("Email or Phone Number and Password are not match.")
+            this.setState ({showModal: false})
         }
 
     }
@@ -132,6 +143,7 @@ class Navbar extends React.Component {
         }
     }
 
+    
     componentDidMount () {
         this.getUsername ()
     }
@@ -153,67 +165,108 @@ class Navbar extends React.Component {
 
                             {/* Appear on all size */}
                             <div className="furniture-font-size-25">
-                                <span className="font-weight-bold">
-                                    Magasin 
-                                </span>
-                                <span className="font-italic">
-                                    de 
-                                </span>
-                                <span className="font-weight-bold">
-                                    Meubles 
-                                </span>
+                                <a href="http://localhost:3000/" className="furniture-link">
+                                    <span className="font-weight-bold">
+                                        Magasin 
+                                    </span>
+                                    <span className="font-italic">
+                                        de 
+                                    </span>
+                                    <span className="font-weight-bold">
+                                        Meubles 
+                                    </span>
+                                </a>
                             </div>
 
                             {/* Only appear on desktop */}
                             <div className="d-none d-lg-block">
-                                <span className="mr-3">
+                                <span>
                                     Home Interior
                                 </span>
                                 
-                                <span className="mr-3">
+                                <span className="mx-3">
                                     Office Interior
                                 </span> 
 
-                                <span className="mr-3">
+                                <span className="mx-3">
                                     Interior Design
+                                </span>
+
+                                <span>
+                                    <Link to="/products" className="furniture-link">Products</Link>
                                 </span>
 
                             </div>
 
                             <div className="d-none d-md-block">
-                                <span className= "mr-2">
+                                <span className= "">
                                     {
                                         this.state.username ? `Hi, ${this.state.username}` : null
                                     }
                                 </span>
-
-                                <a href="" className="furniture-link">
-                                    <span className="mr-2" onClick={this.logOut}>
-                                    {
-                                        this.state.username ? `/ Logout` : null
-                                    }
-                                    </span>
-                                </a>
                                 
-                                {/* <span>
-                                    <ButtonDropdown isOpen={this.state.showDropDown} toggle= {() => this.setState({setOpen: true })} className="bt furniture-bt-primary">
+                                <span>
+                                    <ButtonDropdown isOpen={this.state.showDropDown} toggle= {() => this.setState({showDropDown: !this.state.showDropDown})} className="bt furniture-bt-primary">
                                         <DropdownToggle caret color="furniture-bg-primary" className="text-light">
                                             <FontAwesomeIcon icon= {faUser} className="mr-3"></FontAwesomeIcon>
                                         </DropdownToggle>
                                         <DropdownMenu>
-                                            <DropdownItem>Add User</DropdownItem>
-                                            <DropdownItem>Login User</DropdownItem>
-                                            <DropdownItem>Edit User</DropdownItem>
-                                            <DropdownItem divider ></DropdownItem>
-                                            <DropdownItem>Log Out</DropdownItem>
+                                            <DropdownItem>
+                                                {
+                                                    localStorage.getItem ("id") ? 
+                                                        null 
+                                                    : 
+                                                    <a href="http://localhost:3000/register" className="furniture-link">
+                                                        <span>
+                                                            <FontAwesomeIcon icon={faUserPlus} className="mr-1"></FontAwesomeIcon>
+                                                            Add User
+                                                        </span> 
+                                                    </a>
+                                                }
+                                            </DropdownItem>
+                                            <DropdownItem>
+                                                {
+                                                    localStorage.getItem ("id") ? 
+                                                        null 
+                                                    : 
+                                                    <span className="furniture-clickable-element" onClick ={() => this.setState ({showModal: true})}>
+                                                        <FontAwesomeIcon icon={faSignInAlt} className="mr-1" ></FontAwesomeIcon>
+                                                        Login User
+                                                    </span>
+                
+                                                }
+                                            </DropdownItem>
+                                            <DropdownItem>
+                                                {
+                                                    localStorage.getItem ("id") ? 
+                                                        <span>
+                                                            <FontAwesomeIcon icon={faCog} className="mr-1" ></FontAwesomeIcon>
+                                                            Edit User
+                                                        </span>
+                                                          
+                                                    : 
+                                                        null
+                                                }
+                                            </DropdownItem>
+                                            <DropdownItem>
+                                                {
+                                                    localStorage.getItem ("id") ? 
+                                                    <span className="furniture-clickable-element" onClick={this.logOut}>
+                                                        <FontAwesomeIcon icon={faSignOutAlt} className="mr-1"></FontAwesomeIcon>
+                                                        Log Out
+                                                    </span> 
+                                                    : 
+                                                        null
+                                                }
+                                            </DropdownItem>
                                         </DropdownMenu>
 
                                     </ButtonDropdown>
-                                </span> */}
-
-                                <span onClick ={() => this.setState ({showModal: true})}>
-                                    <FontAwesomeIcon icon= {faUser} className="mr-3"></FontAwesomeIcon>
                                 </span>
+
+                                {/* <span className="furniture-clickable-element" onClick ={() => this.setState ({showModal: true})}>
+                                    <FontAwesomeIcon icon= {faUser} className="mr-3"></FontAwesomeIcon>
+                                </span> */}
 
                                 <span>
                                     <FontAwesomeIcon icon= {faShoppingCart}></FontAwesomeIcon>
@@ -227,7 +280,14 @@ class Navbar extends React.Component {
                                         this.state.username ? `Hi, ${this.state.username}` : null
                                     }
                                 </span>
-                                <span onClick ={() => this.setState ({showModal: true})}>
+                                
+                                <span className="furniture-clickable-element mr-2" onClick={this.logOut}>
+                                    {   
+                                        this.state.username ? `/ Logout` : null
+                                    }
+                                </span>
+
+                                <span className="furniture-clickable-elementk" onClick ={() => this.setState ({showModal: true})}>
                                     <FontAwesomeIcon icon= {faUser} className="mr-3"></FontAwesomeIcon>
                                 </span>
 
@@ -280,8 +340,14 @@ class Navbar extends React.Component {
 
                         <div>
                             <input type="button" value="Login" className="btn furniture-bt-primary" onClick={this.logIn}/>
-                        </div>
+                        </div>                      
                     </ModalBody>
+                    <ModalFooter>
+                        <p>
+                            Haven't registered yet ? 
+                            <a href="http://localhost:3000/register"> Register here</a>
+                        </p>
+                    </ModalFooter>
 
                 </Modal>
 

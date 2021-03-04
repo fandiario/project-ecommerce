@@ -6,6 +6,7 @@ import Footer from "./Components/Footer"
 
 import LandingPage from "./Pages/LandingPage"
 import Register from "./Pages/Register"
+import CatalogueProduct from "./Pages/Products"
 import DetailProduct from "./Pages/DetailProduct"
 
 
@@ -27,6 +28,7 @@ class App extends React.Component {
             <Route exact path="/" component={LandingPage}></Route>
             <Route path="/register" component={Register}></Route>
             <Route path="/detail-product/1" component={DetailProduct}></Route>
+            <Route path="/products" component={CatalogueProduct}></Route>
           </Switch>
   
           <Footer></Footer>

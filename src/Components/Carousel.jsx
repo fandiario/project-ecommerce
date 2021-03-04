@@ -1,7 +1,7 @@
 import React from "react"
 import Axios from "axios"
+import Slider from "react-slick"
 import linkAPIProducts from "../Supports/Constants/LinkAPIProducts"
-import Slider from "react-slick";
 
 // CSS
 import "slick-carousel/slick/slick.css";
@@ -31,22 +31,45 @@ class Carousel extends React.Component {
         return this.state.dataProducts.map ((el, i) => {
 
             return (
-                <div key = {i} className="d-flex justify-content-center">
-                    <div className="col-5">
-                        <img src={el.image1} alt="" className="furniture-img-carousel img-fluid"/>
-                    </div>
-                    
-                    <div className="col-5">
-                        <div className="font-weight-bold furniture-font-size-30">
-                            Discount {el.discount} %
-                        </div>
+                el.discount ?
 
-                        <div className="font-weight-bold furniture-font-size-20 ">
-                            {el.name} 
+                <div key={i}>
+                    <div className="card furniture-border-primary furniture-border-rad-3" style={{width: "14rem"}}>
+                        <div className="card-header furniture-bg-primary text-light">
+                            <h5 className="card-title">
+                                Discount {el.discount} %
+                            </h5>
+                        </div>
+                        <img src= {el.image1} className="card-img-top" alt=""/>
+                        <div className="card-body">
+                            <h6 className="card-text furniture-font-size-20 font-weight-bold">{el.name}</h6>
+                            <p>
+                                
+                                <del>
+                                    Rp.
+                                        {
+                                            el.price.toLocaleString ()
+                                        }
+                                </del>
+                                
+                            </p>
+                            <p className="font-weight-bold furniture-font-size-16">
+                                Rp. 
+                                {
+                                    (el.price - (el.price * (el.discount / 100))).toLocaleString()
+                                } 
+                            </p>
+                            <a href={`http://localhost:3000/detail-product/${el.id}`} className="btn furniture-bt-primary">See More ...</a>
                         </div>
                     </div>
-                    
+
                 </div>
+                
+
+                :
+
+                null
+                
             )
         })
 
@@ -62,7 +85,15 @@ class Carousel extends React.Component {
             dots: true,
             infinite: true,
             speed: 500,
-            slidesToShow: 2,
+            slidesToShow: 4,
+            slidesToScroll: 1
+        }
+
+        const settingsMobile = {
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
             slidesToScroll: 1
         }
 
@@ -84,15 +115,23 @@ class Carousel extends React.Component {
         } else {
 
             return (
-                <div className="container my-5 d-none d-sm-block">
-                    {/* <h1>
-                        Hello from Carousel
-                    </h1> */}
-                                
-                    <Slider {...settings}>
-                        {this.mapDataProducts()}
-                    </Slider>
-                </div>
+                <>  
+                    {/* Desktop Display */}
+                    <div className="container my-5 d-none d-md-block">
+                        <Slider {...settings}>
+                            {this.mapDataProducts()}
+                        </Slider>
+                    </div>
+
+
+                    {/* Mobile Display */}
+                    <div className="container my-5 d-block d-md-none">
+                        <Slider {...settingsMobile}>
+                            {this.mapDataProducts()}
+                        </Slider>
+                    </div>
+                </>
+                
             )
 
         }

@@ -111,7 +111,7 @@ class Footer extends React.Component {
                 </div>
                 
 
-                <div className="row furniture-bg-primary justify-content-center pt-3 text-light fixed-bottom">
+                <div className="row furniture-bg-primary justify-content-center pt-3 text-light">
                     <p className="font-weight-bold">
                         Purwadhika Digital Technology School
                     </p>

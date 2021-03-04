@@ -9,7 +9,7 @@ class Jumbotron extends React.Component {
                     Discount Up To 25%
                 </h1>
 
-                <button type="button" className="btn btn-warning font-weight-bold furniture-font-size-35 m-3">Buy It Now</button>
+                <a href="http://localhost:3000/products/" className="btn btn-warning font-weight-bold furniture-font-size-35 m-3">Buy Now !</a>
             </div>
         )
     }

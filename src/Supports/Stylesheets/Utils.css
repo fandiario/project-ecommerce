@@ -7,6 +7,10 @@
     --danger: #b71540;
 }
 
+body {
+    overflow-x:hidden;
+}
+
 /* Background-Color */
 .furniture-bg-primary {
     background-color: var(--primary);
@@ -98,7 +102,15 @@
 
 /* Border */
 .furniture-border-dark {
-    border: 2px solid var(--dark);
+    border: 3px solid var(--dark);
+}
+
+.furniture-border-primary {
+    border: 3px solid var(--primary);
+}
+
+.furniture-border-rad-3 {
+    border-radius: 3px;
 }
 
 
@@ -132,5 +144,9 @@
 .furniture-bt-danger {
     background-color: var(--danger);
     color: var(--light);
+}
+
+.furniture-clickable-element {
+    cursor: pointer
 }
 

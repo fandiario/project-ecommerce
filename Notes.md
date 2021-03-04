@@ -39,3 +39,11 @@ Tugas
     = Buat Login with modal / Logout 
     = Buat React Slick carousel di landing Page
 
+Kamis 4 Mar
+
+= Ubah Carousel jadi yang muncul hanya diskon saja
+= Tampilkan harga sebelum dan sesudah didiskon
+= Buat setting untuk desktop dan mobile
+= Buat filter dan sort
+= Buat detail Product
+

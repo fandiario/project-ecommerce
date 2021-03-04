@@ -2,3 +2,11 @@
     width: auto;
     height: 30vh;
 }
+
+.furniture-border-primary {
+    border: 3px solid var(--primary);
+}
+
+.furniture-border-rad-3 {
+    border-radius: 3px;
+}

@@ -1,6 +1,7 @@
 import React from "react"
 import Jumbotron from "../Components/Jumbotron"
 import Carousel from "../Components/Carousel"
+import Motto from "../Components/Motto"
 
 
 class LandingPage extends React.Component {
@@ -8,6 +9,7 @@ class LandingPage extends React.Component {
         return (
             <>
                 <Jumbotron></Jumbotron>
+                <Motto></Motto>
                 <Carousel></Carousel>
             </>
         )
