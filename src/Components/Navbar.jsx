@@ -1,5 +1,6 @@
 import React from "react"
 import Axios from "axios"
+import swal from 'sweetalert'
 import {Link} from "react-router-dom" 
 import linkAPI from "../Supports/Constants/LinkAPI"
 
@@ -119,8 +120,13 @@ class Navbar extends React.Component {
 
             .then ((res) => {
                 localStorage.setItem("id", res.data[0].id)
-                console.log (res.data)
+                // console.log (res.data)
                 this.setState ({showModal: false})
+                swal({
+                    title: "Log In",
+                    text: "You have been logged in",
+                    icon: "success",
+                });
                 window.location = "/"
             })
 
@@ -128,19 +134,47 @@ class Navbar extends React.Component {
                 console.log (err)
             })
         } else {
-            alert ("Email or Phone Number and Password are not match.")
+            // alert ("Email or Phone Number and Password are not match.")
+            swal({
+                text: "Email or Phone Number and Password are not match.",
+                icon: "error",
+            })
+
             this.setState ({showModal: false})
         }
 
     }
 
     logOut = () => {
-        let confirm = window.confirm ("Are you sure you want to log out ?")
+        // let confirm = window.confirm ("Are you sure you want to log out ?")
 
-        if (confirm) {
-            localStorage.removeItem ("id")
-            window.location = "/"
-        }
+        // if (confirm) {
+        //     localStorage.removeItem ("id")
+        //     swal({
+        //         title: "Log Out",
+        //         text: "You have been logged out",
+        //         icon: "success",
+        //     });
+        //     window.location = "/"
+        // }
+
+        swal({
+            title: "Are you sure you want to log out?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((res) => {
+              
+            if (res) {
+                localStorage.removeItem ("id")
+                swal("You have been logged out.", {
+                    icon: "success",
+                });
+                window.location = "/"
+
+            } 
+        });
     }
 
     
@@ -231,7 +265,7 @@ class Navbar extends React.Component {
                                                     : 
                                                     <span className="furniture-clickable-element" onClick ={() => this.setState ({showModal: true})}>
                                                         <FontAwesomeIcon icon={faSignInAlt} className="mr-1" ></FontAwesomeIcon>
-                                                        Login User
+                                                        Log In
                                                     </span>
                 
                                                 }

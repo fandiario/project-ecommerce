@@ -1,5 +1,6 @@
 import React from "react"
 import Axios from "axios"
+import swal from 'sweetalert'
 
 import phoneValidation from "../Supports/Functions/phoneValidation"
 import emailValidation from "../Supports/Functions/emailValidation"
@@ -213,7 +214,12 @@ class Register extends React.Component {
             .then ((res) => {
                 if (res.status === 201) {
                     console.log ("Data User has been registered")
-                    alert ("Data User has been registered")
+                    // alert ("Data User has been registered")
+                    
+                    swal({
+                        text: "Data User has been registered",
+                        icon: "error",
+                    })
 
                     this.refs.emailPhoneRegister.value = ""
                     this.refs.usernameRegister.value = ""
@@ -221,6 +227,11 @@ class Register extends React.Component {
                     this.refs.confirmPasswordRegister.value = ""
 
                     localStorage.setItem("id", res.data.id)
+                    swal({
+                        title: "Registered",
+                        text: "Your data has been registered",
+                        icon: "success",
+                    });
                     window.location = '/'
                 }
             })
