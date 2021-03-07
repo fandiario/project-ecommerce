@@ -47,3 +47,7 @@ Kamis 4 Mar
 = Buat filter dan sort
 = Buat detail Product
 
+Jumat, 5 Mar
+= Buat layout dan wireframe dari page cart
+= updating jumlah cart di navbar dengan windows location saja..
+

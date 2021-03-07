@@ -1,8 +1,10 @@
 import React from "react"
 import Axios from "axios"
 import swal from 'sweetalert'
-import {Link} from "react-router-dom" 
+import {Link} from "react-router-dom"
+
 import linkAPI from "../Supports/Constants/LinkAPI"
+import linkAPICarts from "../Supports/Constants/linkAPICarts"
 
 
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
@@ -26,7 +28,9 @@ class Navbar extends React.Component {
         errLoginEmailPhone: null,
         errLoginPass: null,
         emailPhoneValid: null,
-        passwordValid: null
+        passwordValid: null,
+        dataCart: null,
+        cartQuantity: null
     }
 
     getUsername = () => {
@@ -122,12 +126,14 @@ class Navbar extends React.Component {
                 localStorage.setItem("id", res.data[0].id)
                 // console.log (res.data)
                 this.setState ({showModal: false})
+                window.location = "/"
                 swal({
                     title: "Log In",
                     text: "You have been logged in",
                     icon: "success",
+                    className:"furniture-border-primary"
                 });
-                window.location = "/"
+               
             })
 
             .catch ((err)=> {
@@ -138,6 +144,7 @@ class Navbar extends React.Component {
             swal({
                 text: "Email or Phone Number and Password are not match.",
                 icon: "error",
+                className:"furniture-border-primary"
             })
 
             this.setState ({showModal: false})
@@ -146,21 +153,11 @@ class Navbar extends React.Component {
     }
 
     logOut = () => {
-        // let confirm = window.confirm ("Are you sure you want to log out ?")
-
-        // if (confirm) {
-        //     localStorage.removeItem ("id")
-        //     swal({
-        //         title: "Log Out",
-        //         text: "You have been logged out",
-        //         icon: "success",
-        //     });
-        //     window.location = "/"
-        // }
-
+        
         swal({
             title: "Are you sure you want to log out?",
             icon: "warning",
+            className:"furniture-border-primary",
             buttons: true,
             dangerMode: true,
           })
@@ -168,18 +165,48 @@ class Navbar extends React.Component {
               
             if (res) {
                 localStorage.removeItem ("id")
+                window.location = "/"
                 swal("You have been logged out.", {
                     icon: "success",
-                });
-                window.location = "/"
+                    className:"furniture-border-primary"
+                })
 
             } 
         });
     }
 
+    getDataCart = () => {
+        let userId = localStorage.getItem ("id")
+
+        Axios.get (linkAPICarts+`?idUser=${userId}`)
+
+        .then ((res) => {
+            this.setState ({dataCart: res.data})
+            this.setState ({cartQuantity: res.data.length})
+            // console.log (res.data.length)
+            // console.log (`After ${this.state.dataCart}`)
+        })
+
+        .catch ((err) => {
+            console.log (err)
+        })
+    }
+
+    getToCartPage = () => {
+        let userId = localStorage.getItem ("id")
+        userId ?
+            window.location = `/cart/${userId}`
+        :
+            swal ({
+                text: "You haven't logged in yet!",
+                icon: "error",
+                className:"furniture-border-primary"                
+            })
+    }
     
     componentDidMount () {
         this.getUsername ()
+        this.getDataCart ()
     }
 
     componentDidUpdate () {
@@ -302,9 +329,16 @@ class Navbar extends React.Component {
                                     <FontAwesomeIcon icon= {faUser} className="mr-3"></FontAwesomeIcon>
                                 </span> */}
 
-                                <span>
+                                <span className="furniture-clickable-element" onClick={this.getToCartPage}>
                                     <FontAwesomeIcon icon= {faShoppingCart}></FontAwesomeIcon>
+                                        {
+                                            localStorage.getItem("id") ?
+                                                <span className="badge badge-pill badge-light mx-1">{(this.state.cartQuantity)} item(s)</span>
+                                            :
+                                                null
+                                        }
                                 </span>
+        
                             </div>
 
                             {/* Only apper on tablet */}

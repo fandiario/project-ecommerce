@@ -197,6 +197,8 @@ class Register extends React.Component {
         let emailInput = this.state.emailSubmit
         let phoneInput = this.state.phoneSubmit
 
+        let registerValid = false
+
         let dataUser = {
             username : usernameInput,
             password : passwordInput,
@@ -204,9 +206,24 @@ class Register extends React.Component {
             phone : phoneInput,
             role: "user" 
         }
-        console.log ("check before Axios register")
+        // console.log ("check before Axios register")
 
-        if (this.state.passwordMatch === true && usernameInput && passwordInput && emailInput || this.state.passwordMatch === true && usernameInput && passwordInput && phoneInput) {
+        if (this.state.passwordMatch === true && usernameInput && passwordInput && emailInput) {
+            registerValid = true
+
+        } else if (this.state.passwordMatch === true && usernameInput && passwordInput && phoneInput) {
+            registerValid = true   
+
+        } else {
+            swal({
+                text: "Error submitting data register",
+                icon: "error",
+                className:"furniture-border-primary"
+            })
+
+        }
+
+        if (registerValid === true) {
             console.log ("check Axios register")
 
             Axios.post (linkAPI, dataUser)
@@ -219,6 +236,7 @@ class Register extends React.Component {
                     swal({
                         text: "Data User has been registered",
                         icon: "error",
+                        className:"furniture-border-primary"
                     })
 
                     this.refs.emailPhoneRegister.value = ""
@@ -231,6 +249,7 @@ class Register extends React.Component {
                         title: "Registered",
                         text: "Your data has been registered",
                         icon: "success",
+                        className:"furniture-border-primary"
                     });
                     window.location = '/'
                 }
@@ -239,6 +258,14 @@ class Register extends React.Component {
             .catch ((err) => {
                 console.log (err)
             })
+
+        } else {
+            swal({
+                text: "Error submitting data register",
+                icon: "error",
+                className:"furniture-border-primary"
+            })
+
         }
     }
     
@@ -248,12 +275,16 @@ class Register extends React.Component {
 
                 <div className= "row">
 
+                    <h1>
+                        Register
+                    </h1>
+
+                    <div className="col-12 furniture-bg-primary my-2" style={{height: "5px"}}></div>
+
                     <div className="col-6">
 
                         <div className="d-flex flex-column justify-content-around m-3">
-                            <h1>
-                                Register
-                            </h1>
+                           
 
                             <form style={{width: "75vh"}}>
                                 <div className="form-group">

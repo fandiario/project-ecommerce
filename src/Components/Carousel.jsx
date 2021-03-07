@@ -34,16 +34,23 @@ class Carousel extends React.Component {
                 el.discount ?
 
                 <div key={i}>
-                    <div className="card furniture-border-primary furniture-border-rad-3" style={{width: "14rem"}}>
-                        <div className="card-header furniture-bg-primary text-light">
+                    <div className="card furniture-border-primary furniture-border-rad-3 d-flex align-items-center" style={{width: "15rem", height: "25rem"}}>
+                        {/* <div className="card-header furniture-bg-primary text-light" style={{width: "100%"}}>
                             <h5 className="card-title">
                                 Discount {el.discount} %
                             </h5>
+                        </div> */}
+                        <div className="d-flex justify-content-center pt-3">
+                            {/* <img src= {el.image1} className="card-img-top" alt="" style={{width: "60%", height: "auto"}}/> */}
+                            <img src={el.image1} className="card-img-top my-2 d-flex " alt="..." style={{height: "25vh", width:"100%"}}/>
                         </div>
-                        <img src= {el.image1} className="card-img-top" alt=""/>
-                        <div className="card-body">
+                        
+                        <div className="card-body d-flex flex-column justify-content-end">
                             <h6 className="card-text furniture-font-size-20 font-weight-bold">{el.name}</h6>
-                            <p>
+                            <div>
+                                <span className="mr-2 furniture-bg-primary furniture-border-rad-5 text-light px-2">
+                                    {el.discount} %
+                                </span>
                                 
                                 <del>
                                     Rp.
@@ -52,13 +59,13 @@ class Carousel extends React.Component {
                                         }
                                 </del>
                                 
-                            </p>
-                            <p className="font-weight-bold furniture-font-size-16">
+                            </div>
+                            <div className="font-weight-bold furniture-font-size-16 mb-3">
                                 Rp. 
                                 {
                                     (el.price - (el.price * (el.discount / 100))).toLocaleString()
                                 } 
-                            </p>
+                            </div>
                             <a href={`http://localhost:3000/detail-product/${el.id}`} className="btn furniture-bt-primary">See More ...</a>
                         </div>
                     </div>
@@ -117,19 +124,34 @@ class Carousel extends React.Component {
             return (
                 <>  
                     {/* Desktop Display */}
-                    <div className="container my-5 d-none d-md-block">
-                        <Slider {...settings}>
-                            {this.mapDataProducts()}
-                        </Slider>
+                    <div className="container d-none d-md-block ">
+                        <div className="col-md-12 furniture-bg-primary my-2" style={{height: "5px"}}></div>
+
+                        <div className="container my-5">
+                            <Slider {...settings}>
+                                {this.mapDataProducts()}
+                            </Slider>
+                        </div>
+
+                        <div className="col-md-12 furniture-bg-primary my-2" style={{height: "5px"}}></div>
                     </div>
+                    
 
 
                     {/* Mobile Display */}
-                    <div className="container my-5 d-block d-md-none">
-                        <Slider {...settingsMobile}>
-                            {this.mapDataProducts()}
-                        </Slider>
+                    <div className="container d-block d-md-none">
+                        <div className="col-12 furniture-bg-primary my-2" style={{height: "5px"}}></div>
+
+                        <div className="container my-5">
+                            <Slider {...settingsMobile}>
+                                {this.mapDataProducts()}
+                            </Slider>
+                        </div>
+
+                        <div className="col-12 furniture-bg-primary my-2" style={{height: "5px"}}></div>
                     </div>
+                   
+                    
                 </>
                 
             )

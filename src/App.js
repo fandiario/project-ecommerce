@@ -8,6 +8,7 @@ import LandingPage from "./Pages/LandingPage"
 import Register from "./Pages/Register"
 import CatalogueProduct from "./Pages/Products"
 import DetailProduct from "./Pages/DetailProduct"
+import Cart from "./Pages/Cart"
 
 
 // CSS 
@@ -27,8 +28,11 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={LandingPage}></Route>
             <Route path="/register" component={Register}></Route>
-            <Route path="/detail-product/1" component={DetailProduct}></Route>
             <Route path="/products" component={CatalogueProduct}></Route>
+            <Route path="/detail-product/:idProduct" component={DetailProduct}></Route>
+            <Route path="/cart/:idUser" component={Cart}></Route>
+
+            {/* <Route path={`/cart/${localStorage.getItem ("id")}`} component={Cart}></Route> */}
           </Switch>
   
           <Footer></Footer>

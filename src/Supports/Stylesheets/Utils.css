@@ -109,8 +109,24 @@ body {
     border: 3px solid var(--primary);
 }
 
+.furniture-border-rad-1 {
+    border-radius: 1px;
+}
+
+.furniture-border-rad-2 {
+    border-radius: 2px;
+}
+
 .furniture-border-rad-3 {
     border-radius: 3px;
+}
+
+.furniture-border-rad-4 {
+    border-radius: 4px;
+}
+
+.furniture-border-rad-5 {
+    border-radius: 5px;
 }
 
 
@@ -149,4 +165,7 @@ body {
 .furniture-clickable-element {
     cursor: pointer
 }
+
+
+
 

@@ -37,43 +37,49 @@ class CatalogueProduct extends React.Component {
         return this.state.dataProducts.map ((el, i) => {
             return (
                 <div key={i}>
-                    <div className="card furniture-border-primary furniture-border-rad-3 my-3" style={{width: "18rem"}}>
-                        <img src={el.image1} className="card-img-top img-fluid" alt="..." style={{height: "250px", width:"100%"}}/>
-                        <div className="card-body">
+                    <div className="card furniture-border-primary furniture-border-rad-3 my-3 d-flex align-items-center flex-column" style={{width: "15rem", height: "30rem"}}>
+                        <div className="d-flex justify-content-center p-5" >
+                            <img src={el.image1} className="card-img-top my-2 d-flex " alt="..." style={{height: "auto", width:"100%"}}/>
+                        </div>
+                        
+                        <div className="card-body d-flex flex-column justify-content-end">
                             <h5 className="card-title">{el.name}</h5>
 
                             {
                                 el.discount ?
 
                                 <div className="card-text">
-                                    <p>
+                                    <div>
+                                        <span className="mr-2 furniture-bg-primary furniture-border-rad-5 text-light px-2">
+                                            {el.discount} %
+                                        </span>
                                         <del>
                                             Rp. {el.price.toLocaleString ()}
                                         </del>
-                                    </p>
+                                    </div>
                                     
-                                    <p className="font-weight-bold furniture-font-size-25">
+                                    <div className="font-weight-bold furniture-font-size-25">
                                         Rp. { (el.price - (el.price * (el.discount / 100))).toLocaleString() }
-                                    </p>
+                                    </div>
                                     
                                     
                                 </div>
                                 
                                 :
 
-                                <p className="card-text font-weight-bold furniture-font-size-25">
+                                <div className="card-text font-weight-bold furniture-font-size-25">
                                     Rp. {el.price.toLocaleString ()}
-                                </p>
+                                </div>
 
 
                             }
-                            <p className="furniture-font-size-18">
+                            <div className="furniture-font-size-18 mt-3">
                                 Brand: {el.brand}
-                            </p>
+                            </div>
 
-                            <p className="furniture-font-size-18">
+                            <div className="furniture-font-size-18 mb-3">
                                 Category: {el.category}
-                            </p>
+                            </div>
                             
                             <a href={`http://localhost:3000/detail-product/${el.id}`} className="btn furniture-bt-primary">See more...</a>
                         </div>
@@ -136,7 +142,7 @@ class CatalogueProduct extends React.Component {
     filterProduct = () => {
         let category = this.refs.inputCategory.value
         let brand = this.refs.inputBrand.value
-        // console.log ("check before backup all")
+        console.log (this.state.dataBackupProducts)
 
         let filterProductRes = this.state.dataBackupProducts.filter ((data) => {
             if (category === "all" && brand === "all") {
@@ -203,7 +209,6 @@ class CatalogueProduct extends React.Component {
         if (this.state.dataProducts === null) {
             return (
                 <>
-
                     <div className="row">
                         <div className="col-12">
                             <h1>
@@ -257,6 +262,8 @@ class CatalogueProduct extends React.Component {
                         <h1>
                             Products 
                         </h1>
+                        <div className="col-12 furniture-bg-primary my-2" style={{height: "5px"}}></div>
+                        
                         <div className="col-12 d-flex flex-wrap justify-content-between align-items-center">
                             
                             {
