@@ -204,6 +204,7 @@ class Navbar extends React.Component {
 
     getToCartPage = () => {
         let userId = localStorage.getItem ("id")
+        
         userId ?
             window.location = `/cart/${userId}`
         :
@@ -359,18 +360,84 @@ class Navbar extends React.Component {
                                     }
                                 </span>
                                 
-                                <span className="furniture-clickable-element mr-2" onClick={this.logOut}>
+                                {/* <span className="furniture-clickable-element mr-2" onClick={this.logOut}>
                                     {   
                                         this.state.username ? `/ Logout` : null
                                     }
-                                </span>
+                                </span> */}
 
                                 <span className="furniture-clickable-elementk" onClick ={() => this.setState ({showModal: true})}>
                                     <FontAwesomeIcon icon= {faUser} className="mr-3"></FontAwesomeIcon>
                                 </span>
 
-                                <span>
-                                    <FontAwesomeIcon icon= {faShoppingCart} className="mr-3"></FontAwesomeIcon>
+                                {/* <span> */}
+                                {/* <span className="furniture-clickable-elementk" onClick ={() => this.setState ({showModal: true})}> */}
+                                    {/* <ButtonDropdown isOpen={this.state.showDropDown} toggle= {() => this.setState({showDropDown: !this.state.showDropDown})} className="bt furniture-bt-primary">
+                                        <DropdownToggle caret color="furniture-bg-primary" className="text-light">
+                                            <FontAwesomeIcon icon= {faUser} className="mr-3"></FontAwesomeIcon>
+                                        </DropdownToggle>
+                                        <DropdownMenu>
+                                            <DropdownItem>
+                                                {
+                                                    localStorage.getItem ("id") ? 
+                                                        null 
+                                                    : 
+                                                    <a href="http://localhost:3000/register" className="furniture-link">
+                                                        <span>
+                                                            <FontAwesomeIcon icon={faUserPlus} className="mr-1"></FontAwesomeIcon>
+                                                            Add User
+                                                        </span> 
+                                                    </a>
+                                                }
+                                            </DropdownItem>
+                                            <DropdownItem>
+                                                {
+                                                    localStorage.getItem ("id") ? 
+                                                        null 
+                                                    : 
+                                                    <span className="furniture-clickable-element" onClick ={() => this.setState ({showModal: true})}>
+                                                        <FontAwesomeIcon icon={faSignInAlt} className="mr-1" ></FontAwesomeIcon>
+                                                        Log In
+                                                    </span>
+                
+                                                }
+                                            </DropdownItem>
+                                            <DropdownItem>
+                                                {
+                                                    localStorage.getItem ("id") ? 
+                                                        <span>
+                                                            <FontAwesomeIcon icon={faCog} className="mr-1" ></FontAwesomeIcon>
+                                                            Edit User
+                                                        </span>
+                                                          
+                                                    : 
+                                                        null
+                                                }
+                                            </DropdownItem>
+                                            <DropdownItem>
+                                                {
+                                                    localStorage.getItem ("id") ? 
+                                                    <span className="furniture-clickable-element" onClick={this.logOut}>
+                                                        <FontAwesomeIcon icon={faSignOutAlt} className="mr-1"></FontAwesomeIcon>
+                                                        Log Out
+                                                    </span> 
+                                                    : 
+                                                        null
+                                                }
+                                            </DropdownItem>
+                                        </DropdownMenu>
+
+                                    </ButtonDropdown> */}
+                                {/* </span> */}
+
+                                <span className="furniture-clickable-element" onClick={this.getToCartPage}>
+                                    <FontAwesomeIcon icon= {faShoppingCart}></FontAwesomeIcon>
+                                        {
+                                            localStorage.getItem("id") ?
+                                                <span className="badge badge-pill badge-light mx-1">{(this.state.cartQuantity)} item(s)</span>
+                                            :
+                                                null
+                                        }
                                 </span>
                             </div>
                             

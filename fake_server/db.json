@@ -84,7 +84,7 @@
       "stock": 10,
       "price": 5000000,
       "discount": 0,
-      "weight": 40000,
+      "weight": 10000,
       "image1": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/441/0644159_PE702455_S4.jpg",
       "image2": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/518/0451892_PE600819_S4.jpg",
       "image3": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/438/0543813_PE654768_S4.jpg"
@@ -95,7 +95,7 @@
       "brand": "Ikea",
       "category": "Office Furniture",
       "stock": 40,
-      "price": 3000000,
+      "price": 850000,
       "discount": 0,
       "weight": 5000,
       "image1": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/132/0613246_PE686179_S4.jpg",
@@ -110,7 +110,7 @@
       "stock": 20,
       "price": 6000000,
       "discount": 10,
-      "weight": 25000,
+      "weight": 8000,
       "image1": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/132/0613223_PE686157_S4.jpg",
       "image2": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/565/0656542_PE709383_S4.jpg",
       "image3": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/565/0656543_PE709380_S4.jpg"
@@ -341,6 +341,12 @@
       "idProduct": "3",
       "quantity": 1,
       "id": 5
+    },
+    {
+      "idUser": "5",
+      "idProduct": "18",
+      "quantity": 1,
+      "id": 6
     }
   ],
   "transactions": []

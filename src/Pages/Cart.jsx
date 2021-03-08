@@ -46,7 +46,10 @@ class Cart extends React.Component {
                 // console.log (res.data[0])
                 arr.push (res.data[0])
                 this.setState ({dataProduct: arr})
+                
+                this.calculateTotal ()
                 // console.log (this.state.dataProduct)
+                
             })
 
             .catch ((err) => {
@@ -205,6 +208,48 @@ class Cart extends React.Component {
 
     }
 
+    calculateTotal = () => {
+        let arrSubtotals = []
+        let arrQuantities = []
+        let arrDiscPrices = []
+
+        let subtotals = 0
+        let discPrice = 0
+        let result = 0
+
+        for (let i = 0; i < (this.state.dataProduct).length; i++) {
+            
+            let dataPrice = this.state.dataProduct[i].price
+            let dataDisc = this.state.dataProduct[i].discount
+
+            discPrice =  dataPrice - (dataPrice * (dataDisc / 100))
+
+            arrDiscPrices.push (discPrice)
+        }
+
+        for (let j = 0; j < (this.state.dataCart).length; j++) {
+
+            let dataQuantity = this.state.dataCart[j].quantity
+
+            arrQuantities.push (dataQuantity)
+
+        }
+
+        for (let k = 0; k < arrQuantities.length; k++) {
+            
+            subtotals = arrQuantities[k] * arrDiscPrices[k]
+
+            arrSubtotals.push (subtotals)
+        }
+
+        for (let l = 0; l < arrSubtotals.length; l++) {
+            result += arrSubtotals[l]
+        }
+
+        this.setState ({totalPrice: result})
+
+    }
+
     checkoutCart = () => {
 
         swal({
@@ -257,11 +302,12 @@ class Cart extends React.Component {
 
     componentDidMount () {
         this.getDataCart ()
+        // this.calculateTotal ()
     }
 
     render () {
 
-        if (this.state.dataCart === null || this.state.dataProduct === null ) {
+        if (this.state.dataCart === null || this.state.dataProduct === null || this.state.totalPrice === 0) {
             return (
                 <div className="d-flex justify-content-center mt-5">
                     {/* <div className="spinner-grow" role="status">

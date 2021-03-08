@@ -8,7 +8,8 @@ import linkAPICarts from "../Supports/Constants/linkAPICarts"
 class DetailProduct extends React.Component {
 
     state = {
-        dataDetailProduct : null
+        dataDetailProduct : null,
+        mainImage : null
     }
 
     getDetailProduct = () => {
@@ -21,7 +22,8 @@ class DetailProduct extends React.Component {
 
         .then ((res) => {
             // console.log (res.data)
-            this.setState ({dataDetailProduct: res.data})            
+            this.setState ({dataDetailProduct: res.data})     
+            this.setState ({mainImage: res.data.image1})       
         })
 
         .catch ((err) => {
@@ -55,7 +57,10 @@ class DetailProduct extends React.Component {
                         icon: "success",
                         className:"furniture-border-primary"
                     });
-                    window.location = `/detail-product/${productId}`
+                    let url = this.props.location.pathname
+                    
+                    window.location = url
+                    // window.location = `/detail-product/${productId}`
                 })
 
                 .catch ((err) => {
@@ -134,13 +139,13 @@ class DetailProduct extends React.Component {
 
                     <div className="col-12 col-md-6">
                         <div>
-                            <img src={this.state.dataDetailProduct.image1} className="img-fluid" alt=""/>
+                            <img src={this.state.mainImage} className="img-fluid" alt=""/>
                         </div>
 
                         <div className="d-flex flex-row justify-content-between mt-5">
-                            <img src= {this.state.dataDetailProduct.image1} className="img-fluid furniture-img-thumb" alt=""/>
-                            <img src={this.state.dataDetailProduct.image2} className="img-fluid furniture-img-thumb" alt=""/>
-                            <img src={this.state.dataDetailProduct.image3} className="img-fluid furniture-img-thumb" alt=""/>
+                            <img src= {this.state.dataDetailProduct.image1} className={this.state.mainImage === this.state.dataDetailProduct.image1 ? "img-fluid furniture-img-thumb furniture-clickable-element furniture-border-primary furniture-border-rad-5" : "img-fluid furniture-img-thumb furniture-clickable-element"} alt="" onClick={() => this.setState ({mainImage: this.state.dataDetailProduct.image1})}/>
+                            <img src={this.state.dataDetailProduct.image2} className={this.state.mainImage === this.state.dataDetailProduct.image2 ? "img-fluid furniture-img-thumb furniture-clickable-element furniture-border-primary furniture-border-rad-5" : "img-fluid furniture-img-thumb furniture-clickable-element"} alt="" onClick={() => this.setState ({mainImage: this.state.dataDetailProduct.image2})}/>
+                            <img src={this.state.dataDetailProduct.image3} className={this.state.mainImage === this.state.dataDetailProduct.image3 ? "img-fluid furniture-img-thumb furniture-clickable-element furniture-border-primary furniture-border-rad-5" : "img-fluid furniture-img-thumb furniture-clickable-element"} alt="" onClick={() => this.setState ({mainImage: this.state.dataDetailProduct.image3})}/>
                         </div>
                         
 
@@ -166,7 +171,10 @@ class DetailProduct extends React.Component {
                                         </div>
 
                                         <h3 className="font-weight-bold">
-                                            Discount : {this.state.dataDetailProduct.discount} %
+                                            Discount : 
+                                            <span className="furniture-bg-primary furniture-border-rad-5 text-light px-2 ml-2">
+                                                {this.state.dataDetailProduct.discount} %
+                                            </span>
                                         </h3>
                                     </div>
 
@@ -183,7 +191,7 @@ class DetailProduct extends React.Component {
 
                         <div>
                             <p className="furniture-font-size-18">
-                                Stock : {this.state.dataDetailProduct.stock}
+                                Stock : {this.state.dataDetailProduct.stock} item(s)
                             </p>
 
                             <p className="furniture-font-size-18">
@@ -198,6 +206,15 @@ class DetailProduct extends React.Component {
                             </h5>
                             <p className="furniture-font-size-18">
                                 {this.state.dataDetailProduct.category}
+                            </p>
+                        </div>
+
+                        <div>
+                            <h5 className="furniture-font-size-18">
+                                Description :
+                            </h5>
+                            <p className="furniture-font-size-18">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur nemo beatae eum minima ex aut sapiente eveniet molestiae, nam non vitae porro explicabo omnis illo, dicta, modi incidunt est numquam.
                             </p>
                         </div>
 
