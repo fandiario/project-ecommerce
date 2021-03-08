@@ -10,6 +10,7 @@ import Register from "./Pages/Register"
 import CatalogueProduct from "./Pages/Products"
 import DetailProduct from "./Pages/DetailProduct"
 import Cart from "./Pages/Cart"
+import Payment from "./Pages/Payment"
 
 // Redux
 import {createStore, applyMiddleware} from "redux"
@@ -40,6 +41,7 @@ class App extends React.Component {
               <Route path="/products" component={CatalogueProduct}></Route>
               <Route path="/detail-product/:idProduct" component={DetailProduct}></Route>
               <Route path="/cart/:idUser" component={Cart}></Route>
+              <Route path="/payment/:idUser" component={Payment}></Route>
 
               <ValidRoute path="/register" component={Register}></ValidRoute>
 

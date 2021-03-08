@@ -2,13 +2,14 @@ import React from "react"
 import Axios from "axios"
 import swal from 'sweetalert'
 
+import {connect} from "react-redux"
 import {Link} from "react-router-dom"
 // import { Alert } from 'reactstrap'
 
 import linkAPI from "../Supports/Constants/LinkAPI"
 import linkAPICarts from "../Supports/Constants/linkAPICarts"
 
-import {connect} from "react-redux"
+
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

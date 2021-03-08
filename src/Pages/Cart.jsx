@@ -1,6 +1,7 @@
 import React from "react"
 import Axios from "axios"
 import swal from 'sweetalert'
+import {Link} from "react-router-dom"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -231,10 +232,6 @@ class Cart extends React.Component {
 
     addProductCart = (index) => {
 
-        // console.log (this.state.dataProduct[index])
-        // console.log (this.state.dataCart[index])
-        // console.log (this.state.dataCart[index].id)
-
         let cartId = this.state.dataCart[index].id
         let plusQuantity = this.state.dataCart[index].quantity + 1
         
@@ -243,8 +240,6 @@ class Cart extends React.Component {
         .then ((res) => {
             if (res.status === 200) {
                 this.getDataCart ()
-
-                // console.log ("check")
             
             } else {
 
@@ -274,7 +269,6 @@ class Cart extends React.Component {
             if (res.status === 200) {
                 this.getDataCart ()
 
-                // console.log ("check")
             } else {
                 
                 swal({
@@ -336,52 +330,36 @@ class Cart extends React.Component {
     }
 
     checkoutCart = () => {
+        let dataToSend = {
+            idUser: localStorage.getItem("id"),
+            // idDataCart: this.state.
+            totalPrice: this.state.totalPrice
+        }
 
-        // swal({
-        //     title: "Are you sure you want to check out ?",
-        //     icon: "warning",
-        //     buttons: true,
-        //     dangerMode: true,
-        //     className:"furniture-border-primary"
-        //   })
+        swal({
+            title: "Are you sure you want to check out ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            className:"furniture-border-primary"
+          })
 
-        //   .then((res) => {
+          .then((res) => {
 
-        //     if (res) {
-        //         console.log ("checkout")
+            if (res) {
+                
+                
+               window.location (`/payment/${localStorage.getItem("id")}`)
+            } else {
 
-        //         let userId = localStorage.getItem ("id")
+              swal({
+                text: "Your transaction has been canceled",
+                className:"furniture-border-primary"
+              })
 
-        //         Axios.delete (linkAPICarts + `?idUser=${userId}`)
-        //         // Axios.get (linkAPICarts + `?idUser=${userId}`)
+            }
 
-        //         .then ((res) => {
-        //             console.log (res.data)
-
-        //             swal({
-        //                 title: "Your cart has been checked out",
-        //                 text: "Thank you for your patronage",
-        //                 icon: "success",
-        //                 className:"furniture-border-primary"
-        //             })
-
-        //             window.location="/"
-        //         })
-
-        //         .catch ((err) => {
-        //             console.log (err)
-        //         })
-
-        //     } else {
-
-        //       swal({
-        //         text: "Your transaction has been canceled",
-        //         className:"furniture-border-primary"
-        //       })
-
-        //     }
-
-        // })
+        })
 
     }
 
