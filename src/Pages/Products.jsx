@@ -51,7 +51,7 @@ class CatalogueProduct extends React.Component {
                                 <div className="card-text">
                                     <div>
                                         <span className="mr-2 furniture-bg-primary furniture-border-rad-5 text-light px-2">
-                                            {el.discount} %
+                                            {el.discount} % OFF
                                         </span>
                                         <del>
                                             Rp. {el.price.toLocaleString ()}
@@ -327,9 +327,6 @@ class CatalogueProduct extends React.Component {
                     </ModalFooter>
 
                 </Modal>
-
-
-
                 
             </>
             

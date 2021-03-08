@@ -51,3 +51,9 @@ Jumat, 5 Mar
 = Buat layout dan wireframe dari page cart
 = updating jumlah cart di navbar dengan windows location saja..
 
+
+Senin 8 Mar 
+= Buat supaya takbisa diakses register lewat url
+= Buat supaya password bisa dilihat
+= Buat Payment page
+

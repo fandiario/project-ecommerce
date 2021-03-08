@@ -8,13 +8,13 @@ import {Link} from "react-router-dom"
 import linkAPI from "../Supports/Constants/LinkAPI"
 import linkAPICarts from "../Supports/Constants/linkAPICarts"
 
-
+import {connect} from "react-redux"
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import 
     { 
-        faUser,faSearch, faShoppingCart, faBars, faCog, faUserPlus, faSignInAlt, faSignOutAlt
+        faUser,faSearch, faShoppingCart, faBars, faCog, faUserPlus, faSignInAlt, faSignOutAlt, faEye, faEyeSlash
     } from '@fortawesome/free-solid-svg-icons'
 
 
@@ -31,8 +31,8 @@ class Navbar extends React.Component {
         errLoginPass: null,
         emailPhoneValid: null,
         passwordValid: null,
-        dataCart: null,
-        cartQuantity: null
+        currentTotalCarts: 0,
+        eyeCon: true
     }
 
     getUsername = () => {
@@ -136,12 +136,6 @@ class Navbar extends React.Component {
                     className:"furniture-border-primary"
                 })
 
-                // {
-                //     <Alert color="primary">
-                //         This is a primary alert with <a href="#" className="alert-link">an example link</a>. Give it a click if you like.
-                //     </Alert>
-                // }
-
                 window.location = "/"
                
             })
@@ -185,21 +179,24 @@ class Navbar extends React.Component {
         });
     }
 
-    getDataCart = () => {
+    switchInput = () => {
+
+        this.setState ({eyeCon: !this.state.eyeCon})
+    }
+
+    getCurrentTotalCarts = () => {  
         let userId = localStorage.getItem ("id")
 
         Axios.get (linkAPICarts+`?idUser=${userId}`)
 
         .then ((res) => {
-            this.setState ({dataCart: res.data})
-            this.setState ({cartQuantity: res.data.length})
-            // console.log (res.data.length)
-            // console.log (`After ${this.state.dataCart}`)
+            this.setState ({currentTotalCarts: res.data.length})
         })
 
         .catch ((err) => {
             console.log (err)
         })
+
     }
 
     getToCartPage = () => {
@@ -214,10 +211,11 @@ class Navbar extends React.Component {
                 className:"furniture-border-primary"                
             })
     }
+
     
     componentDidMount () {
         this.getUsername ()
-        this.getDataCart ()
+        this.getCurrentTotalCarts ()
     }
 
     componentDidUpdate () {
@@ -336,15 +334,11 @@ class Navbar extends React.Component {
                                     </ButtonDropdown>
                                 </span>
 
-                                {/* <span className="furniture-clickable-element" onClick ={() => this.setState ({showModal: true})}>
-                                    <FontAwesomeIcon icon= {faUser} className="mr-3"></FontAwesomeIcon>
-                                </span> */}
-
                                 <span className="furniture-clickable-element" onClick={this.getToCartPage}>
                                     <FontAwesomeIcon icon= {faShoppingCart}></FontAwesomeIcon>
                                         {
                                             localStorage.getItem("id") ?
-                                                <span className="badge badge-pill badge-light mx-1">{(this.state.cartQuantity)} item(s)</span>
+                                                <span className="badge badge-pill badge-light mx-1">{(this.state.currentTotalCarts)} item(s)</span>
                                             :
                                                 null
                                         }
@@ -360,75 +354,15 @@ class Navbar extends React.Component {
                                     }
                                 </span>
                                 
-                                {/* <span className="furniture-clickable-element mr-2" onClick={this.logOut}>
+                                <span className="furniture-clickable-element mr-2" onClick={this.logOut}>
                                     {   
                                         this.state.username ? `/ Logout` : null
                                     }
-                                </span> */}
+                                </span>
 
                                 <span className="furniture-clickable-elementk" onClick ={() => this.setState ({showModal: true})}>
                                     <FontAwesomeIcon icon= {faUser} className="mr-3"></FontAwesomeIcon>
                                 </span>
-
-                                {/* <span> */}
-                                {/* <span className="furniture-clickable-elementk" onClick ={() => this.setState ({showModal: true})}> */}
-                                    {/* <ButtonDropdown isOpen={this.state.showDropDown} toggle= {() => this.setState({showDropDown: !this.state.showDropDown})} className="bt furniture-bt-primary">
-                                        <DropdownToggle caret color="furniture-bg-primary" className="text-light">
-                                            <FontAwesomeIcon icon= {faUser} className="mr-3"></FontAwesomeIcon>
-                                        </DropdownToggle>
-                                        <DropdownMenu>
-                                            <DropdownItem>
-                                                {
-                                                    localStorage.getItem ("id") ? 
-                                                        null 
-                                                    : 
-                                                    <a href="http://localhost:3000/register" className="furniture-link">
-                                                        <span>
-                                                            <FontAwesomeIcon icon={faUserPlus} className="mr-1"></FontAwesomeIcon>
-                                                            Add User
-                                                        </span> 
-                                                    </a>
-                                                }
-                                            </DropdownItem>
-                                            <DropdownItem>
-                                                {
-                                                    localStorage.getItem ("id") ? 
-                                                        null 
-                                                    : 
-                                                    <span className="furniture-clickable-element" onClick ={() => this.setState ({showModal: true})}>
-                                                        <FontAwesomeIcon icon={faSignInAlt} className="mr-1" ></FontAwesomeIcon>
-                                                        Log In
-                                                    </span>
-                
-                                                }
-                                            </DropdownItem>
-                                            <DropdownItem>
-                                                {
-                                                    localStorage.getItem ("id") ? 
-                                                        <span>
-                                                            <FontAwesomeIcon icon={faCog} className="mr-1" ></FontAwesomeIcon>
-                                                            Edit User
-                                                        </span>
-                                                          
-                                                    : 
-                                                        null
-                                                }
-                                            </DropdownItem>
-                                            <DropdownItem>
-                                                {
-                                                    localStorage.getItem ("id") ? 
-                                                    <span className="furniture-clickable-element" onClick={this.logOut}>
-                                                        <FontAwesomeIcon icon={faSignOutAlt} className="mr-1"></FontAwesomeIcon>
-                                                        Log Out
-                                                    </span> 
-                                                    : 
-                                                        null
-                                                }
-                                            </DropdownItem>
-                                        </DropdownMenu>
-
-                                    </ButtonDropdown> */}
-                                {/* </span> */}
 
                                 <span className="furniture-clickable-element" onClick={this.getToCartPage}>
                                     <FontAwesomeIcon icon= {faShoppingCart}></FontAwesomeIcon>
@@ -466,7 +400,8 @@ class Navbar extends React.Component {
                     <ModalHeader>Login</ModalHeader>
                     <ModalBody>
                         <div>
-                            <input type="text" placeholder="Insert your phone number / email" className="form form-control" ref="emailPhoneLogin" onChange={this.checkEmailPhone}/>
+                            <label htmlFor="emailPhoneLogin">Email or Phone Number</label>
+                            <input type="text" className="form form-control" ref="emailPhoneLogin" onChange={this.checkEmailPhone}/>
                             <small className="text-muted">
                                 {
                                     this.state.errLoginEmailPhone ? this.state.errLoginEmailPhone : null
@@ -475,7 +410,28 @@ class Navbar extends React.Component {
                         </div>
 
                         <div className="my-3">
-                            <input type="password" placeholder="Insert your password" className="form form-control" ref="passwordLogin" onChange={this.checkPass}/>
+                            <div className="d-flex justify-content-between">
+                                <label htmlFor="passwordLogin">Password</label>
+                                <button className="btn bg-transparent" onClick={this.switchInput}>
+                                    {
+                                        this.state.eyeCon === true ?
+                                            <FontAwesomeIcon icon= {faEye}></FontAwesomeIcon>
+                                        :
+                                            <FontAwesomeIcon icon= {faEyeSlash}></FontAwesomeIcon>
+                                    }
+                                </button>
+                            </div>
+
+                            <div>
+                                {   
+                                    this.state.eyeCon === true ?
+                                        <input type="password" className="form form-control" ref="passwordLogin" onChange={this.checkPass}/>
+                                    :
+                                        <input type="text" className="form form-control" ref="passwordLogin" onChange={this.checkPass}/>
+                                }
+                            </div>
+                            
+                            
                             <small className="text-muted">
                                 {
                                     this.state.errLoginPass ? this.state.errLoginPass : null
@@ -502,4 +458,11 @@ class Navbar extends React.Component {
     }
 }
 
-export default Navbar
+const mapStateToProps = (state) => {
+    return {
+        carts: state.carts
+    }
+}
+
+export default connect (mapStateToProps, "") (Navbar)
+// export default Navbar
