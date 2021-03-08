@@ -314,39 +314,21 @@
   "carts": [
     {
       "idUser": "2",
-      "idProduct": "1",
-      "quantity": 2,
-      "id": 1
-    },
-    {
-      "idUser": "2",
-      "idProduct": "2",
-      "quantity": 2,
-      "id": 2
-    },
-    {
-      "idUser": "3",
-      "idProduct": "4",
-      "quantity": 2,
+      "idProduct": "20",
+      "quantity": 4,
       "id": 3
     },
     {
-      "idUser": "3",
-      "idProduct": "5",
-      "quantity": 2,
+      "idUser": "2",
+      "idProduct": "19",
+      "quantity": 1,
       "id": 4
     },
     {
-      "idUser": "3",
-      "idProduct": "3",
-      "quantity": 1,
-      "id": 5
-    },
-    {
-      "idUser": "5",
+      "idUser": "2",
       "idProduct": "18",
       "quantity": 1,
-      "id": 6
+      "id": 5
     }
   ],
   "transactions": []

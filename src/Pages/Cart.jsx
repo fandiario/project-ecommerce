@@ -49,7 +49,6 @@ class Cart extends React.Component {
                 
                 this.calculateTotal ()
                 // console.log (this.state.dataProduct)
-                
             })
 
             .catch ((err) => {
@@ -58,7 +57,6 @@ class Cart extends React.Component {
 
         }
 
-        
     }
 
     mapProductCart = () => {
@@ -79,7 +77,7 @@ class Cart extends React.Component {
                               </div>
 
                                 <div className="col-4 d-flex justify-content-end">
-                                    <button className="btn">
+                                    <button className="btn" onClick={() => this.deleteProductCart (i)}>
                                         <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
                                     </button>
                                     
@@ -112,17 +110,17 @@ class Cart extends React.Component {
 
                                         <div className="col-5 d-flex justify-content-end align-items-center">
                                             <span>
-                                                <button type="button" className="btn justify-content-center">
+                                                <button type="button" disabled={(this.state.dataCart[i].quantity === 1 ? true : false)} className="btn furniture-bt-primary justify-content-center mr-1" style={{borderRadius: "100%"}} onClick={ () => this.reduceProductCart (i)}>
                                                     <FontAwesomeIcon icon={faMinus}></FontAwesomeIcon>  
                                                 </button>
                                             </span>
                                             
-                                            <span className="furniture-border-primary d-flex justify-content-center furniture-border-rad-5" style={{width: "50px"}}>
+                                            <span className="furniture-border-primary d-flex justify-content-center furniture-border-rad-5" style={{width: "50px"}} >
                                                 {this.state.dataCart[i].quantity}
                                             </span>
                                             
                                             <span>
-                                                <button type="button" className="btn justify-content-center" onClick={this.addProductCart}>
+                                                <button type="button" disabled={(this.state.dataCart[i].quantity === el.stock ? true : false)} className="btn furniture-bt-primary justify-content-center ml-1" style={{borderRadius: "100%"}} onClick={ () => this.addProductCart (i)}>
                                                     <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>  
                                                 </button>
                                             </span>
@@ -147,33 +145,27 @@ class Cart extends React.Component {
     mapSummaryOrder = () => {
         return this.state.dataProduct.map ((el, i) => {
             return (
-                <div key={i} className="container d-flex justify-content-center align-items-center">
+                <div key={i} className="container furniture-font-size-16">
                     <div className="row">
-                        <div className="col-3 my-2">
+                        <div className="col-3 my-2 d-flex justify-content-center">
                             {el.name}
                         </div>
-                        <div className="col-3 my-2">
-                            
-                            Quantity
-                            {/* {
-                                this.state.dataCart.map ((val, index) => {
-                                    return (
-                                        <span key={index}>
-                                            {val.quantity}
-                                        </span>
-                                    )
-                                })
-                            } */}
+
+                        <div className="col-3 my-2 d-flex justify-content-center">
+                            {
+                                this.state.dataCart[i].quantity
+                            } item(s)
                             
                         </div>
-                        <div className="col-3 my-2">
+                        <div className="col-3 my-2 d-flex justify-content-center">
                             <span>
                                  @ Rp. { (el.price - (el.price * (el.discount / 100))).toLocaleString() }
                             </span>
                         </div>
-                        <div className="col-3 my-2">
+                        <div className="col-3 my-2 d-flex justify-content-center">
                             <span>
-                                Subtotal
+                                Rp. {((el.price - (el.price * (el.discount / 100))) * (this.state.dataCart[i].quantity)).toLocaleString ()}
+
                             </span>
                         </div>
                     </div>
@@ -184,31 +176,149 @@ class Cart extends React.Component {
 
     }
 
-    deleteProductCart = () => {
+    deleteProductCart = (index) => {
+        let cartId = this.state.dataCart[index].id
 
-    }
+        swal({
+            title: "Are you sure you want to remove this product from your cart?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            className: "furniture-border-primary"
+          })
 
-    addProductCart = () => {
-        console.log (this.state.dataProduct)
-        console.log (this.state.dataCart)
+          .then((willDelete) => {
+            if (willDelete) {
+                Axios.delete (linkAPICarts + `/${cartId}`)
 
-        // for (let i = 0; i < (this.state.dataCart).length; i++) {
-        //     for (let j = 0; j < (this.state.dataProduct).length; j++) {
-        //         if (Number (this.state.dataCart[i].idProduct) === this.state.dataProduct[j].id ){
-        //             console.log ("check")
-        //             console.log (i)
-        //             // console.log (typeof (this.state.dataProduct[j].id))
-        //             // console.log (typeof (this.state.dataCart[i].idProduct))
-        //         }
+                .then ((res) => {
+                    if (res.status === 200) {
+
+                        swal({
+                            title: "This product has been removed from your cart",
+                            icon: "success",
+                            className: "furniture-border-primary"
+                        })
+
+                        window.location= `${this.props.location.pathname}`
+
+                    } else {
+                        swal({
+                            title: `Error : ${res.status}`,
+                            icon: "error",
+                            className: "furniture-border-primary"
+                        })
+                    }
+                })
+
+
+                .catch ((err) => {
+                    console.log (err)
+                })
+              
+              
+            } else {
+
+                swal({
+                    title: "This action has been canceled",
+                    className: "furniture-border-primary"
+                })
+              
+            }
+          })
+
+        // Axios.delete (linkAPICarts + `/${cartId}`)
+
+        // .then ((res) => {
+            
+            
+            
+            
+        //     if (res.status === 200) {
+        //         this.getDataCart ()
+            
+        //     } else {
+
+        //         swal({
+        //             title: `Error : ${res.status}`,
+        //             icon: "error",
+        //             className: "furniture-border-primary"
+        //         })
+
         //     }
-        // }
+        // })
+
+        // .catch ((err) =>{
+        //     console.log (err)
+        // })
+
     }
 
-    reduceProductCart = () => {
+    addProductCart = (index) => {
+
+        // console.log (this.state.dataProduct[index])
+        // console.log (this.state.dataCart[index])
+        // console.log (this.state.dataCart[index].id)
+
+        let cartId = this.state.dataCart[index].id
+        let plusQuantity = this.state.dataCart[index].quantity + 1
+        
+        Axios.patch (linkAPICarts +`/${cartId}`, {quantity: plusQuantity}) 
+
+        .then ((res) => {
+            if (res.status === 200) {
+                this.getDataCart ()
+
+                // console.log ("check")
+            
+            } else {
+
+                swal({
+                    title: `Error : ${res.status}`,
+                    icon: "error",
+                    className: "furniture-border-primary"
+                })
+
+            }
+        })
+
+        .catch ((err) => {
+            console.log (err)
+        })
+
+    }
+
+    reduceProductCart = (index) => {
+
+        let cartId = this.state.dataCart[index].id
+        let minQuantity = this.state.dataCart[index].quantity - 1
+
+        Axios.patch (linkAPICarts + `/${cartId}`, {quantity: minQuantity})
+
+        .then ((res) => {
+            if (res.status === 200) {
+                this.getDataCart ()
+
+                // console.log ("check")
+            } else {
+                
+                swal({
+                    title: `Error : ${res.status}`,
+                    icon: "error",
+                    className: "furniture-border-primary"
+                })
+
+            }
+        })
+
+        .catch ((err) => {
+            console.log (err)
+        })
 
     }
 
     calculateTotal = () => {
+
         let arrSubtotals = []
         let arrQuantities = []
         let arrDiscPrices = []
@@ -252,57 +362,58 @@ class Cart extends React.Component {
 
     checkoutCart = () => {
 
-        swal({
-            title: "Are you sure you want to check out ?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            className:"furniture-border-primary"
-          })
+        // swal({
+        //     title: "Are you sure you want to check out ?",
+        //     icon: "warning",
+        //     buttons: true,
+        //     dangerMode: true,
+        //     className:"furniture-border-primary"
+        //   })
 
-          .then((res) => {
+        //   .then((res) => {
 
-            if (res) {
-                console.log ("checkout")
+        //     if (res) {
+        //         console.log ("checkout")
 
-                let userId = localStorage.getItem ("id")
+        //         let userId = localStorage.getItem ("id")
 
-                Axios.delete (linkAPICarts + `?idUser=${userId}`)
-                // Axios.get (linkAPICarts + `?idUser=${userId}`)
+        //         Axios.delete (linkAPICarts + `?idUser=${userId}`)
+        //         // Axios.get (linkAPICarts + `?idUser=${userId}`)
 
-                .then ((res) => {
-                    console.log (res.data)
+        //         .then ((res) => {
+        //             console.log (res.data)
 
-                    swal({
-                        title: "Your cart has been checked out",
-                        text: "Thank you for your patronage",
-                        icon: "success",
-                        className:"furniture-border-primary"
-                    })
+        //             swal({
+        //                 title: "Your cart has been checked out",
+        //                 text: "Thank you for your patronage",
+        //                 icon: "success",
+        //                 className:"furniture-border-primary"
+        //             })
 
-                    window.location="/"
-                })
+        //             window.location="/"
+        //         })
 
-                .catch ((err) => {
-                    console.log (err)
-                })
+        //         .catch ((err) => {
+        //             console.log (err)
+        //         })
 
-            } else {
+        //     } else {
 
-              swal({
-                text: "Your transaction has been canceled",
-                className:"furniture-border-primary"
-              })
+        //       swal({
+        //         text: "Your transaction has been canceled",
+        //         className:"furniture-border-primary"
+        //       })
 
-            }
+        //     }
 
-        })
+        // })
 
     }
 
     componentDidMount () {
         this.getDataCart ()
         // this.calculateTotal ()
+        console.log (this.props.location.pathname)
     }
 
     render () {
@@ -342,43 +453,21 @@ class Cart extends React.Component {
                                 Summary Order
                             </h2>
 
-                            {/* <div className="row">
-                                <div className="col-3">
-                                    <span>
-                                        Name
-                                    </span>
-                                </div>
-                                <div className="col-3">
-                                    <span>
-                                        Quantity
-                                    </span>
-                                </div>
-                                <div className="col-3">
-                                    <span>
-                                        Price
-                                    </span>
-                                </div>
-                                <div className="col-3">
-                                    <span>
-                                        Subtotal
-                                    </span>
-                                </div>
-                            </div> */}
-
                             <div className="row">
                                 <div className="col-12">
                                     {this.mapSummaryOrder ()}
                                 </div>
                                 
                             </div>
-                            <div className="row">
+
+                            <div className="row mt-3">
                                 <h3>
                                     Total : Rp. {(this.state.totalPrice).toLocaleString ()}
                                 </h3>
                                 
                             </div>
                             <div className="my-3">
-                                <input type="button" value="Checkout" className="btn furniture-bt-primary" onClick={this.checkoutCart }/>
+                                <input type="button" value="Check Out" className="btn furniture-bt-primary" onClick={this.checkoutCart }/>
                             </div>
                         </div>
 

@@ -1,9 +1,15 @@
 import React from "react"
 import Axios from "axios"
-import swal from 'sweetalert'
+// import swal from 'sweetalert'
+
+import {connect} from 'react-redux'
 
 import linkAPIProducts from "../Supports/Constants/LinkAPIProducts"
-import linkAPICarts from "../Supports/Constants/linkAPICarts"
+// import linkAPICarts from "../Supports/Constants/linkAPICarts"
+
+// Action Redux
+
+import {getDataCart} from "./../Supports/Redux/Actions/CartAction"
 
 class DetailProduct extends React.Component {
 
@@ -32,73 +38,12 @@ class DetailProduct extends React.Component {
     }
 
     addDataToCart = () => {
+        
         let userId = localStorage.getItem ("id")
         let productId = this.props.location.pathname.split ("/")[2]
+        let quantity = 1
 
-        let dataToAdd = {
-            idUser : userId,
-            idProduct : productId,
-            quantity: 1
-        }
-
-        // Check same product
-        Axios.get (linkAPICarts + `?idProduct=${productId}`) 
-
-        .then ((res) => {
-
-            if (res.data.length === 0) {
-
-                Axios.post (linkAPICarts, dataToAdd)
-
-                .then ((res) => {
-                    // console.log (res)
-                    swal({
-                        title: "Successfully added to your cart",
-                        icon: "success",
-                        className:"furniture-border-primary"
-                    });
-                    let url = this.props.location.pathname
-                    
-                    window.location = url
-                    // window.location = `/detail-product/${productId}`
-                })
-
-                .catch ((err) => {
-                    console.log (err)
-                })
-
-            } else {
-
-                // If there's the same product
-                let cartId = res.data[0].id
-                let quantityCart = res.data[0].quantity
-
-                let addQuantity = quantityCart + 1
-
-                Axios.patch (linkAPICarts + `/${cartId}`, {quantity: addQuantity})
-
-                .then ((res) => {
-                    // console.log (res)
-                    console.log (`Quantity has been added. Quantity now: ${res.data.quantity}`)
-                    swal({
-                        title: "Successfully added to your cart",
-                        icon: "success",
-                        className:"furniture-border-primary"
-                    })
-                    window.location = `/detail-product/${productId}`
-                })
-
-                .catch ((err) => {
-                    console.log (err)
-                })
-
-            }
-
-        })
-
-        .catch ((err) => [
-            console.log (err)
-        ])
+        this.props.getDataCart (userId, productId, quantity)
     }
 
     componentDidMount () {
@@ -232,4 +177,8 @@ class DetailProduct extends React.Component {
 
 }
 
-export default DetailProduct
+const mapDispatchToProps = {getDataCart}
+
+export default connect ("", mapDispatchToProps) (DetailProduct)
+
+// export default DetailProduct
