@@ -20,6 +20,7 @@ class Cart extends React.Component {
 
         Axios.get (linkAPICarts + `?idUser=${userId}`)
 
+
         .then ((res) => {
             // console.log (res.data)
             this.setState ({dataCart: res.data})
@@ -149,9 +150,18 @@ class Cart extends React.Component {
                             {el.name}
                         </div>
                         <div className="col-3 my-2">
-                            <span>
-                                Quantity
-                            </span>
+                            
+                            Quantity
+                            {/* {
+                                this.state.dataCart.map ((val, index) => {
+                                    return (
+                                        <span key={index}>
+                                            {val.quantity}
+                                        </span>
+                                    )
+                                })
+                            } */}
+                            
                         </div>
                         <div className="col-3 my-2">
                             <span>
@@ -210,9 +220,13 @@ class Cart extends React.Component {
             if (res) {
                 console.log ("checkout")
 
-                Axios.delete (linkAPICarts + `?idUser=${localStorage.getItem("id")}`)
+                let userId = localStorage.getItem ("id")
+
+                Axios.delete (linkAPICarts + `?idUser=${userId}`)
+                // Axios.get (linkAPICarts + `?idUser=${userId}`)
 
                 .then ((res) => {
+                    console.log (res.data)
 
                     swal({
                         title: "Your cart has been checked out",
@@ -306,7 +320,10 @@ class Cart extends React.Component {
                             </div> */}
 
                             <div className="row">
-                                {this.mapSummaryOrder ()}
+                                <div className="col-12">
+                                    {this.mapSummaryOrder ()}
+                                </div>
+                                
                             </div>
                             <div className="row">
                                 <h3>

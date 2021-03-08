@@ -1,7 +1,9 @@
 import React from "react"
 import Axios from "axios"
 import swal from 'sweetalert'
+
 import {Link} from "react-router-dom"
+// import { Alert } from 'reactstrap'
 
 import linkAPI from "../Supports/Constants/LinkAPI"
 import linkAPICarts from "../Supports/Constants/linkAPICarts"
@@ -126,13 +128,21 @@ class Navbar extends React.Component {
                 localStorage.setItem("id", res.data[0].id)
                 // console.log (res.data)
                 this.setState ({showModal: false})
-                window.location = "/"
+                
                 swal({
                     title: "Log In",
                     text: "You have been logged in",
                     icon: "success",
                     className:"furniture-border-primary"
-                });
+                })
+
+                // {
+                //     <Alert color="primary">
+                //         This is a primary alert with <a href="#" className="alert-link">an example link</a>. Give it a click if you like.
+                //     </Alert>
+                // }
+
+                window.location = "/"
                
             })
 
