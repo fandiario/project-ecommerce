@@ -225,32 +225,7 @@ class Cart extends React.Component {
                 })
               
             }
-          })
-
-        // Axios.delete (linkAPICarts + `/${cartId}`)
-
-        // .then ((res) => {
-            
-            
-            
-            
-        //     if (res.status === 200) {
-        //         this.getDataCart ()
-            
-        //     } else {
-
-        //         swal({
-        //             title: `Error : ${res.status}`,
-        //             icon: "error",
-        //             className: "furniture-border-primary"
-        //         })
-
-        //     }
-        // })
-
-        // .catch ((err) =>{
-        //     console.log (err)
-        // })
+        })
 
     }
 
