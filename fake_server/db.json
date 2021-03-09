@@ -323,12 +323,6 @@
       "idProduct": "19",
       "quantity": 1,
       "id": 4
-    },
-    {
-      "idUser": "2",
-      "idProduct": "18",
-      "quantity": 1,
-      "id": 5
     }
   ],
   "transactions": []

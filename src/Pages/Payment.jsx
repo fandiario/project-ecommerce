@@ -1,10 +1,87 @@
 import React from "react"
 import Axios from "axios"
 
+import linkAPI from "../Supports/Constants/LinkAPI"
+
+import { Form, FormGroup } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faMobile } from '@fortawesome/free-solid-svg-icons'
 
 class Payment extends React.Component {
+
+    state = {
+        dataUser : null
+    }
+
+    getDataUser = () => {
+        let userId = localStorage.getItem ("id")
+
+        Axios.get (linkAPI + `?id=${userId}`)
+
+        .then ((res) => {
+            // console.log (res.data)
+            this.setState ({dataUser: res.data})
+        })
+
+        .catch ((err) => {
+            console.log (err)
+        })
+    }
+
+    mapDataUser = () => {
+        if (this.state.dataUser === null) {
+            return (
+                <div className="col-12 furniture-font-size-14">
+                    <div className="spinner-grow" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                </div>
+            )
+
+        } else {
+            return this.state.dataUser.map ((el, i) => {
+                return (
+                    <div key={i}>
+                        <div className="col-12 furniture-font-size-14">
+                            <div>
+                                id : {el.id}
+                            </div>
+
+                            <div>
+                                username: {el.username}
+                            </div>
+
+                            <div>
+                                Address: Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                            </div>
+
+                            <div>
+                                <span className="mr-3">
+                                    <FontAwesomeIcon icon= {faEnvelope}></FontAwesomeIcon>
+                                    Email: {el.email}
+                                </span>
+
+                                <span>
+                                    <FontAwesomeIcon icon= {faMobile}></FontAwesomeIcon>
+                                    Phone: {el.phone}
+                                </span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                )
+            })
+                
+            
+        }
+
+    }
+
+    componentDidMount () {
+        this.getDataUser ()
+    }
+
     render () {
 
         return (
@@ -19,32 +96,8 @@ class Payment extends React.Component {
                 <div className="row my-3">
                     <div className="col-12 furniture-border-primary">
                         <div className="row">
-                            
-                            <div className="col-12 furniture-font-size-14">
-                                <div>
-                                    id : insert id here
-                                </div>
 
-                                <div>
-                                    username: insert username here
-                                </div>
-
-                                <div>
-                                    Address: insert address here
-                                </div>
-
-                                <div>
-                                    <span className="mr-3">
-                                        <FontAwesomeIcon icon= {faEnvelope}></FontAwesomeIcon>
-                                        Email: insert email here
-                                    </span>
-
-                                    <span>
-                                        <FontAwesomeIcon icon= {faMobile}></FontAwesomeIcon>
-                                        Phone: insert phone here
-                                    </span>
-                                </div>
-                            </div>
+                            {this.mapDataUser()}
                             
                         </div>
 
@@ -110,7 +163,7 @@ class Payment extends React.Component {
                 </div>
 
                 <div className="row my-3">
-                    <div className="col-12 furniture-border-primary">
+                    <div className="col-9 furniture-border-primary">
                         <div className="row my-2">
                             <div className="col-12">
                                 <h3>
@@ -119,65 +172,86 @@ class Payment extends React.Component {
                             </div>
                         </div>
 
-                        <div className="row">
-                            <div className="col-4">
-                                Overnight Sevice 
-                            </div>
-                            <div className="col-3">
-                                Estimation : 1 day
-                            </div>
-                            <div className="col-3">
-                                Tariff : Rp. insert tariff here
-                            </div>
-                            <div className="col-1">
-                                insert radio button here
-                            </div>
-                        </div>
+                        {/* Radio Form Shipping Section */}
+                        <Form>
+                            <FormGroup check>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <input type="radio" name="shipping-option" ref="opt-overNightService" className="mr-2"/>
+                                        <label htmlFor="opt-oneNightService">
+                                            Over Night Service    
+                                        </label> 
+                                    </div>
+                                    <div className="col-3">
+                                        Estimation : 1 day
+                                    </div>
+                                    <div className="col-3">
+                                        <div className="furniture-bg-primary text-light px-2" style={{borderRadius: "5px"}}>
+                                            Rp. insert here
+                                        </div>
+                                    </div>
+                                </div>
+                            </FormGroup>
 
-                        <div className="row">
-                            <div className="col-4">
-                                Express Service
-                            </div>
-                            <div className="col-3">
-                                Estimation : 2-3 days
-                            </div>
-                            <div className="col-3">
-                                Tariff : Rp. insert tariff here
-                            </div>
-                            <div className="col-1">
-                                insert radio button here
-                            </div>
-                        </div>
+                            <FormGroup check>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <input type="radio" name="shipping-option" ref="opt-expressService" className="mr-2"/>
+                                        <label htmlFor="opt-expressService">
+                                            Express Service    
+                                        </label> 
+                                    </div>
+                                    <div className="col-3">
+                                        Estimation : 2-3 days
+                                    </div>
+                                    <div className="col-3">
+                                        <div className="furniture-bg-primary text-light px-2" style={{borderRadius: "5px"}}>
+                                            Rp. insert here
+                                        </div>
+                                    </div>
+                                </div>
+                            </FormGroup>
 
-                        <div className="row">
-                            <div className="col-4">
-                                Regular Service
-                            </div>
-                            <div className="col-3">
-                                Estimation : 3-5 days
-                            </div>
-                            <div className="col-3">
-                                Tariff : Rp. insert tariff here
-                            </div>
-                            <div className="col-1">
-                                insert radio button here
-                            </div>
-                        </div>
+                            <FormGroup check>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <input type="radio" name="shipping-option" ref="opt-regularService" className="mr-2"/>
+                                        <label htmlFor="opt-regularService">
+                                            Regular Service 
+                                        </label> 
+                                    </div>
+                                    <div className="col-3">
+                                        Estimation : 3-5 days
+                                    </div>
+                                    <div className="col-3">
+                                        <div className="furniture-bg-primary text-light px-2" style={{borderRadius: "5px"}}>
+                                            Rp. insert here
+                                        </div>
+                                    </div>
+                                </div>
+                            </FormGroup>
 
-                        <div className="row">
-                            <div className="col-4">
-                                International Shipping
-                            </div>
-                            <div className="col-3">
-                                Estimation : 7-30 days
-                            </div>
-                            <div className="col-3">
-                                Tariff : Rp. insert tariff here
-                            </div>
-                            <div className="col-1">
-                                insert radio button here
-                            </div>
-                        </div>
+                            <FormGroup check>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <input type="radio" name="shipping-option" ref="opt-interShipping" className="mr-2"/>
+                                        <label htmlFor="opt-interShipping">
+                                            International Shipping 
+                                        </label> 
+                                    </div>
+                                    <div className="col-3">
+                                        Estimation : 7-30 days
+                                    </div>
+                                    <div className="col-3">
+                                        <div className="furniture-bg-primary text-light px-2" style={{borderRadius: "5px"}}>
+                                            Rp. insert here
+                                        </div>
+                                    </div>
+                                </div>
+                            </FormGroup>
+                            
+                        </Form>
+                        
 
                     </div>
                 </div>
@@ -198,53 +272,78 @@ class Payment extends React.Component {
                             </div>
                         </div>
 
-                       <div className="row">
-                           <div className="col-6">
-                               Virtual Account
-                           </div>
-                           <div className="col-6 d-flex flex-row justify-content-between">
-                               <div className="col-6">
-                                   OVO
-                               </div>
-                               <div className="col-6">
-                                   Go-Pay
-                               </div>
-                           </div>
-                       </div>
+                        {/* Radio Form Payment Section */}
+                        <Form>
+                            <FormGroup check>
+                                <div className="row">
+                                    <div className="col-6">
+                                        Virtual Account
+                                    </div>
+                                    <div className="col-6 d-flex flex-row justify-content-between">
+                                        <div className="col-6">
+                                            <input type="radio" name="pay-option" ref="opt-OVO" className="mr-2"/>
+                                            <label htmlFor="opt-OVO">
+                                                OVO 
+                                            </label> 
+                                        </div>
+                                        <div className="col-6">
+                                            <input type="radio" name="pay-option" ref="opt-GoPay" className="mr-2"/>
+                                            <label htmlFor="opt-GoPay">
+                                                GoPay 
+                                            </label> 
+                                        </div>
+                                    </div>
+                                </div>
 
-                       <div className="row my-2">
-                           <div className="col-6">
-                               Bank Transfer
-                           </div>
-                           <div className="col-6 d-flex flex-row justify-content-between">
-                               <div className="col-3">
-                                   BNI
-                               </div>
-                               <div className="col-3">
-                                   Mandiri
-                               </div>
-                               <div className="col-3">
-                                   BCA
-                               </div>
-                               <div className="col-3">
-                                   BRI
-                               </div>
-                           </div>
-                       </div>
+                                <div className="row my-2">
+                                    <div className="col-6">
+                                        Bank Transfer
+                                    </div>
+                                    <div className="col-6 d-flex flex-row justify-content-between">
+                                        <div className="col-4">
+                                        <input type="radio" name="pay-option" ref="opt-Mandiri" className="mr-2"/>
+                                            <label htmlFor="opt-Mandiri">
+                                                Mandiri 
+                                            </label> 
+                                        </div>
+                                        <div className="col-4">
+                                            <input type="radio" name="pay-option" ref="opt-BNI" className="mr-2"/>
+                                            <label htmlFor="opt-BNI">
+                                                BNI 
+                                            </label>  
+                                        </div>
+                                        <div className="col-4">
+                                            <input type="radio" name="pay-option" ref="opt-BCA" className="mr-2"/>
+                                            <label htmlFor="opt-BCA">
+                                                BCA 
+                                            </label> 
+                                        </div>
+                                    </div>
+                                </div>
 
-                       <div className="row my-2">
-                           <div className="col-6">
-                               Credit Card
-                           </div>
-                           <div className="col-6 d-flex flex-row justify-content-between">
-                               <div className="col-6">
-                                   VISA
-                               </div>
-                               <div className="col-6">
-                                   Master Card
-                               </div>
-                           </div>
-                       </div>
+                                <div className="row my-2">
+                                    <div className="col-6">
+                                        Credit Card
+                                    </div>
+                                    <div className="col-6 d-flex flex-row justify-content-between">
+                                        <div className="col-6">
+                                            <input type="radio" name="pay-option" ref="opt-VISA" className="mr-2"/>
+                                                <label htmlFor="opt-VISA">
+                                                    VISA 
+                                                </label> 
+                                        </div>
+                                        <div className="col-6">
+                                            <input type="radio" name="pay-option" ref="opt-MCard" className="mr-2"/>
+                                                <label htmlFor="opt-MCard">
+                                                    MasterCard 
+                                                </label> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </FormGroup>
+
+                        </Form>
+                       
                    </div>
                </div>
 

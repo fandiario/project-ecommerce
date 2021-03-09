@@ -1,7 +1,7 @@
 import React from "react"
 import Axios from "axios"
 import swal from 'sweetalert'
-import {Link} from "react-router-dom"
+// import {Link} from "react-router-dom"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -330,11 +330,11 @@ class Cart extends React.Component {
     }
 
     checkoutCart = () => {
-        let dataToSend = {
-            idUser: localStorage.getItem("id"),
-            // idDataCart: this.state.
-            totalPrice: this.state.totalPrice
-        }
+        // let dataToSend = {
+        //     idUser: localStorage.getItem("id"),
+        //     // idDataCart: this.state.
+        //     totalPrice: this.state.totalPrice
+        // }
 
         swal({
             title: "Are you sure you want to check out ?",
@@ -349,7 +349,7 @@ class Cart extends React.Component {
             if (res) {
                 
                 
-               window.location (`/payment/${localStorage.getItem("id")}`)
+               window.location =`/payment/${localStorage.getItem("id")}`
             } else {
 
               swal({
