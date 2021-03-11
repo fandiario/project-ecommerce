@@ -23,6 +23,7 @@ class CatalogueProduct extends React.Component {
 
         .then ((res) => {
             this.setState ({dataProducts: res.data})
+            // console.log (res.data)
             this.setState ({dataBackupProducts: res.data})
             // console.log (this.state.dataBackupProducts)
         })

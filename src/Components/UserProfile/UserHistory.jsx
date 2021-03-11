@@ -125,28 +125,12 @@ class UserHistory extends React.Component {
         if (this.state.dataTransaction === null) {
             return (
                 
-                // <div className="container">
-                //     <div className="row">
-                //         <Link to={`/user-profile/${localStorage.getItem ("id")}/user-setting`} className="furniture-link nav-link">
-                //             <button className="btn furniture-bt-primary">
-                //                 User Profile
-                //             </button>
-                //         </Link>
-                        
-                //         <Link to={`/user-profile/${localStorage.getItem ("id")}/user-history`} className="furniture-link nav-link">
-                //             <button className="btn furniture-bt-primary">
-                //                 Transaction History
-                //             </button>
-                //         </Link>
-                //     </div>
-
                 <div className='row'>
                     <h1>
                         Your Transaction History is Empty
                     </h1>
                 </div>
                    
-                
             )
         }
 
