@@ -8,12 +8,15 @@ import { faTrashAlt, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import linkAPIProducts from "../Supports/Constants/LinkAPIProducts"
 import linkAPICarts from "../Supports/Constants/linkAPICarts"
+import linkAPITransactions from "../Supports/Constants/LinkAPITransactions"
 
 class Cart extends React.Component {
     state = {
         dataCart: null,
         dataProduct: null,
-        totalPrice: 0
+        totalPrice: 0,
+        totalWeight: 0,
+        idTransaction: null
     }
 
     getDataCart = () => {
@@ -49,6 +52,7 @@ class Cart extends React.Component {
                 this.setState ({dataProduct: arr})
                 
                 this.calculateTotal ()
+                this.calculateWeight ()
                 // console.log (this.state.dataProduct)
             })
 
@@ -329,12 +333,83 @@ class Cart extends React.Component {
 
     }
 
+    calculateWeight = () => {
+
+        let arrSubtotals = []
+        let arrQuantities = []
+        let arrWeights = []
+
+        let subtotals = 0
+        let result = 0
+
+        for (let i = 0; i < (this.state.dataProduct).length; i++) {
+            
+            let dataWeight = this.state.dataProduct[i].weight
+
+            arrWeights.push (dataWeight)
+        }
+
+        for (let j = 0; j < (this.state.dataCart).length; j++) {
+
+            let dataQuantity = this.state.dataCart[j].quantity
+
+            arrQuantities.push (dataQuantity)
+
+        }
+
+        for (let k = 0; k < arrQuantities.length; k++) {
+            
+            subtotals = arrQuantities[k] * arrWeights[k]
+
+            arrSubtotals.push (subtotals)
+        }
+
+        for (let l = 0; l < arrSubtotals.length; l++) {
+            result += arrSubtotals[l]
+        }
+
+        this.setState ({totalWeight: result})
+    }
+
     checkoutCart = () => {
-        // let dataToSend = {
-        //     idUser: localStorage.getItem("id"),
-        //     // idDataCart: this.state.
-        //     totalPrice: this.state.totalPrice
-        // }
+
+        // Get id User
+        let userId = localStorage.getItem ("id")
+
+        // Get date
+        let date = new Date ()
+        date = date.toString ()
+
+        let newDate = date.split (" ")[2] + "-" + date.split (" ")[1] + "-" + date.split (" ")[3] + " " + date.split (" ")[4] 
+
+        // Get Total Price
+        let totalPrice = this.state.totalPrice 
+
+        // Get Total Weight
+        let totalWeight = this.state.totalWeight
+
+        // Get Detail Items
+        let detailItems = this.state.dataCart.map ((el, i) => {
+            return {
+                productName : this.state.dataProduct[i].name,
+                productPrice: this.state.dataProduct[i].price,
+                discPrice: this.state.dataProduct[i].discount,
+                quantity: el.quantity,
+                productImage: this.state.dataProduct[i].image1
+            }
+        })
+
+        let dataTosend = {
+            idUser : userId,
+            status : "unpaid",
+            history: {
+                unpaidAt: newDate,
+                paidAt: null
+            },
+            totalPrice: totalPrice,
+            totalWeight: totalWeight,
+            detail : detailItems
+        }
 
         swal({
             title: "Are you sure you want to check out ?",
@@ -347,9 +422,20 @@ class Cart extends React.Component {
           .then((res) => {
 
             if (res) {
+
+                Axios.post (linkAPITransactions, dataTosend)
+
+                .then ((res) => {
+
+                    this.updateDataStock ()
+
+                    this.setState({ idTransaction : res.data.id }) 
+                })
+
+                .catch ((err) => {
+                    console.log (err)
+                })
                 
-                
-               window.location =`/payment/${localStorage.getItem("id")}`
             } else {
 
               swal({
@@ -358,7 +444,44 @@ class Cart extends React.Component {
               })
 
             }
+        })
+    }
 
+    updateDataStock = () => {
+
+        this.state.dataCart.forEach ((val, i) => {
+
+            let stockBeforeOrder = this.state.dataProduct[i].stock
+            let stockAfterOrder = stockBeforeOrder - val.quantity
+
+            Axios.patch (linkAPIProducts + `/${val.idProduct}`, {stock: stockAfterOrder})
+
+            .then ((res) => {
+
+                // window.location =`/payment/${this.state.idTransaction}`
+
+                // Remove data Cart 
+                Axios.delete (linkAPICarts + `/${val.id}`)
+
+                .then ((res) => {
+
+                    if (res.status === 200) {
+                        window.location =`/payment/${this.state.idTransaction}`
+                    }
+
+                })
+
+                .catch ((err) => {
+                    console.log (err)
+                })
+
+            })
+
+            .catch ((err) => {
+                console.log (err)
+            }) 
+
+            
         })
 
     }
@@ -366,7 +489,7 @@ class Cart extends React.Component {
     componentDidMount () {
         this.getDataCart ()
         // this.calculateTotal ()
-        console.log (this.props.location.pathname)
+        // console.log (this.props.location.pathname)
     }
 
     render () {

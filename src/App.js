@@ -4,6 +4,9 @@ import {BrowserRouter, Switch, Route} from "react-router-dom"
 import Navbar from "./Components/Navbar"
 import Footer from "./Components/Footer"
 import ValidRoute from "./Components/ValidRoute"
+import UserSetting from "./Components/UserProfile/UserSetting"
+import UserHistory from "./Components/UserProfile/UserHistory"
+import UserAddress from "./Components/UserProfile/UserAddress"
 
 import LandingPage from "./Pages/LandingPage"
 import Register from "./Pages/Register"
@@ -11,6 +14,8 @@ import CatalogueProduct from "./Pages/Products"
 import DetailProduct from "./Pages/DetailProduct"
 import Cart from "./Pages/Cart"
 import Payment from "./Pages/Payment"
+import UserProfile from "./Pages/UserProfile"
+
 
 // Redux
 import {createStore, applyMiddleware} from "redux"
@@ -41,7 +46,11 @@ class App extends React.Component {
               <Route path="/products" component={CatalogueProduct}></Route>
               <Route path="/detail-product/:idProduct" component={DetailProduct}></Route>
               <Route path="/cart/:idUser" component={Cart}></Route>
-              <Route path="/payment/:idUser" component={Payment}></Route>
+              <Route path="/payment/:idTransaction" component={Payment}></Route>
+              <Route path="/user-profile/:idUser" component={UserProfile}></Route>
+              <Route path="/user-profile/:idUser/user-setting" component={UserSetting}></Route>
+              <Route path="/user-profile/:idUser/user-history" component={UserHistory}></Route>
+              <Route path="/user-profile/:idUser/user-address" component={UserAddress}></Route>
 
               <ValidRoute path="/register" component={Register}></ValidRoute>
 

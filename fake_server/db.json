@@ -55,7 +55,7 @@
       "name": "Office Desk Set BELEZA",
       "brand": "Ikea",
       "category": "Office Furniture",
-      "stock": 20,
+      "stock": 10,
       "price": 500000,
       "discount": 10,
       "weight": 7000,
@@ -68,7 +68,7 @@
       "name": "Office Chair FLINTAN",
       "brand": "Ikea",
       "category": "Office Furniture",
-      "stock": 30,
+      "stock": 15,
       "price": 3000000,
       "discount": 10,
       "weight": 15000,
@@ -81,7 +81,7 @@
       "name": "File Rack BILLY-OXBERG",
       "brand": "Ikea",
       "category": "Office Furniture",
-      "stock": 10,
+      "stock": 20,
       "price": 5000000,
       "discount": 0,
       "weight": 10000,
@@ -94,7 +94,7 @@
       "name": "Small Cabinet Drawer GALANT",
       "brand": "Ikea",
       "category": "Office Furniture",
-      "stock": 40,
+      "stock": 30,
       "price": 850000,
       "discount": 0,
       "weight": 5000,
@@ -120,7 +120,7 @@
       "name": "Sofa Set 3 Seater HUGHES",
       "brand": "Fabelio",
       "category": "Living Room Set",
-      "stock": 15,
+      "stock": 14,
       "price": 7000000,
       "discount": 0,
       "weight": 15000,
@@ -133,7 +133,7 @@
       "name": "Sofa Set 2 Seater HEMLINGBY",
       "brand": "Ikea",
       "category": "Living Room Set",
-      "stock": 5,
+      "stock": 10,
       "price": 3500000,
       "discount": 10,
       "weight": 10000,
@@ -146,7 +146,7 @@
       "name": "Coffee Table HAVSTA",
       "brand": "Ikea",
       "category": "Living Room Set",
-      "stock": 7,
+      "stock": 19,
       "price": 2500000,
       "discount": 0,
       "weight": 35000,
@@ -159,7 +159,7 @@
       "name": "TV Table HAUGA",
       "brand": "Ikea",
       "category": "Living Room Set",
-      "stock": 12,
+      "stock": 14,
       "price": 800000,
       "discount": 20,
       "weight": 3000,
@@ -172,7 +172,7 @@
       "name": "Hanging Lamp ORLANDO",
       "brand": "Fabelio",
       "category": "Living Room Set",
-      "stock": 8,
+      "stock": 9,
       "price": 500000,
       "discount": 0,
       "weight": 2000,
@@ -185,7 +185,7 @@
       "name": "Bed ANDRES (King Size)",
       "brand": "Fabelio",
       "category": "Bedroom Furniture",
-      "stock": 5,
+      "stock": 10,
       "price": 10000000,
       "discount": 15,
       "weight": 15000,
@@ -211,7 +211,7 @@
       "name": "Bed ANDRES (Single)",
       "brand": "Fabelio",
       "category": "Bedroom Furniture",
-      "stock": 10,
+      "stock": 12,
       "price": 3000000,
       "discount": 25,
       "weight": 10000,
@@ -224,7 +224,7 @@
       "name": "Wardrobe ALTHAS",
       "brand": "Fabelio",
       "category": "Bedroom Furniture",
-      "stock": 10,
+      "stock": 9,
       "price": 2500000,
       "discount": 15,
       "weight": 15000,
@@ -237,7 +237,7 @@
       "name": "Make Up Table ADELE",
       "brand": "Fabelio",
       "category": "Bedroom Furniture",
-      "stock": 7,
+      "stock": 10,
       "price": 2000000,
       "discount": 10,
       "weight": 7000,
@@ -250,7 +250,7 @@
       "name": "Kitchen Cabinet HAVSTA",
       "brand": "Ikea",
       "category": "Kitchen Furniture",
-      "stock": 5,
+      "stock": 20,
       "price": 5000000,
       "discount": 0,
       "weight": 5000,
@@ -276,7 +276,7 @@
       "name": "Refrigerator SAMSUNG",
       "brand": "Fabelio",
       "category": "Kitchen Furniture",
-      "stock": 5,
+      "stock": 15,
       "price": 10000000,
       "discount": 15,
       "weight": 20000,
@@ -289,7 +289,7 @@
       "name": "Dining Table ALOLA",
       "brand": "Fabelio",
       "category": "Kitchen Furniture",
-      "stock": 3,
+      "stock": 10,
       "price": 3000000,
       "discount": 5,
       "weight": 15000,
@@ -302,7 +302,7 @@
       "name": "Dining Chair ALOLA",
       "brand": "Fabelio",
       "category": "Kitchen Furniture",
-      "stock": 12,
+      "stock": 24,
       "price": 500000,
       "discount": 15,
       "weight": 5000,
@@ -311,19 +311,236 @@
       "image3": "https://cdn-m2.fabelio.com/catalog/product/k/a/Kanigoro_Dining_Chair_4.jpg?auto=format&h=640&ixlib=react-9.0.3"
     }
   ],
-  "carts": [
+  "carts": [],
+  "transactions": [
     {
       "idUser": "2",
-      "idProduct": "20",
-      "quantity": 4,
+      "status": "paid",
+      "history": {
+        "unpaidAt": "10-Mar-2021 00:39:21",
+        "paidAt": "10-Mar-2021 00:41:38"
+      },
+      "totalPrice": 14550000,
+      "totalWeight": 45000,
+      "detail": [
+        {
+          "productName": "Dining Table ALOLA",
+          "productPrice": 3000000,
+          "discPrice": 5,
+          "quantity": 1,
+          "productImage": "https://cdn-m2.fabelio.com/catalog/product/m/e/mejak4_motoyo_4_seater_dining-working_table_black_1_2-1_hires.jpg?auto=format&w=1678&ixlib=react-9.0.3"
+        },
+        {
+          "productName": "Dining Chair ALOLA",
+          "productPrice": 500000,
+          "discPrice": 15,
+          "quantity": 4,
+          "productImage": "https://cdn-m2.fabelio.com/catalog/product/k/a/Kanigoro_Dining_Chair_2.jpg?auto=format&w=1678&ixlib=react-9.0.3"
+        },
+        {
+          "productName": "Kitchen Cabinet HAVSTA",
+          "productPrice": 5000000,
+          "discPrice": 0,
+          "quantity": 2,
+          "productImage": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/307/0630734_PE694877_S4.jpg"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "idUser": "2",
+      "status": "paid",
+      "history": {
+        "unpaidAt": "10-Mar-2021 00:45:22",
+        "paidAt": "10-Mar-2021 11:41:23"
+      },
+      "totalPrice": 4000000,
+      "totalWeight": 27000,
+      "detail": [
+        {
+          "productName": "Office Desk Set BELEZA",
+          "productPrice": 500000,
+          "discPrice": 10,
+          "quantity": 1,
+          "productImage": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/728/0172811_PE327002_S4.jpg"
+        },
+        {
+          "productName": "Office Chair FLINTAN",
+          "productPrice": 3000000,
+          "discPrice": 10,
+          "quantity": 1,
+          "productImage": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/247/0724714_PE734597_S4.jpg"
+        },
+        {
+          "productName": "Small Cabinet Drawer GALANT",
+          "productPrice": 850000,
+          "discPrice": 0,
+          "quantity": 1,
+          "productImage": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/132/0613246_PE686179_S4.jpg"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "idUser": "3",
+      "status": "paid",
+      "history": {
+        "unpaidAt": "10-Mar-2021 00:47:09",
+        "paidAt": "10-Mar-2021 00:47:16"
+      },
+      "totalPrice": 8425000,
+      "totalWeight": 42000,
+      "detail": [
+        {
+          "productName": "Bed ANDRES (Single)",
+          "productPrice": 3000000,
+          "discPrice": 25,
+          "quantity": 2,
+          "productImage": "https://cdn-m2.fabelio.com/catalog/product/t/e/tempat_tidur_tromso__queen_10__5_1.jpg?auto=format&w=1678&ixlib=react-9.0.3"
+        },
+        {
+          "productName": "Wardrobe ALTHAS",
+          "productPrice": 2500000,
+          "discPrice": 15,
+          "quantity": 1,
+          "productImage": "https://cdn-m2.fabelio.com/catalog/product/i/m/image__17__crp_720_1.jpg?auto=format&w=1678&ixlib=react-9.0.3"
+        },
+        {
+          "productName": "Make Up Table ADELE",
+          "productPrice": 2000000,
+          "discPrice": 10,
+          "quantity": 1,
+          "productImage": "https://cdn-m2.fabelio.com/catalog/product/m/e/mejar_meja_rias_emily_neutral_1_2-1_hires-preview.jpg?auto=format&w=1678&ixlib=react-9.0.3"
+        }
+      ],
       "id": 3
     },
     {
       "idUser": "2",
-      "idProduct": "19",
-      "quantity": 1,
+      "status": "paid",
+      "history": {
+        "unpaidAt": "10-Mar-2021 11:42:22",
+        "paidAt": "11-Mar-2021 10:13:02"
+      },
+      "totalPrice": 6940000,
+      "totalWeight": 23000,
+      "detail": [
+        {
+          "productName": "TV Table HAUGA",
+          "productPrice": 800000,
+          "discPrice": 20,
+          "quantity": 1,
+          "productImage": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/492/0949272_PE799595_S4.jpg"
+        },
+        {
+          "productName": "Sofa Set 2 Seater HEMLINGBY",
+          "productPrice": 3500000,
+          "discPrice": 10,
+          "quantity": 2,
+          "productImage": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/288/0728848_PE736539_S4.jpg"
+        }
+      ],
       "id": 4
+    },
+    {
+      "idUser": "5",
+      "status": "unpaid",
+      "history": {
+        "unpaidAt": "10-Mar-2021 20:36:37",
+        "paidAt": null
+      },
+      "totalPrice": 2125000,
+      "totalWeight": 15000,
+      "detail": [
+        {
+          "productName": "Wardrobe ALTHAS",
+          "productPrice": 2500000,
+          "discPrice": 15,
+          "quantity": 1,
+          "productImage": "https://cdn-m2.fabelio.com/catalog/product/i/m/image__17__crp_720_1.jpg?auto=format&w=1678&ixlib=react-9.0.3"
+        }
+      ],
+      "id": 5
+    },
+    {
+      "idUser": "3",
+      "status": "paid",
+      "history": {
+        "unpaidAt": "11-Mar-2021 09:07:07",
+        "paidAt": "11-Mar-2021 09:44:14"
+      },
+      "totalPrice": 500000,
+      "totalWeight": 2000,
+      "detail": [
+        {
+          "productName": "Hanging Lamp ORLANDO",
+          "productPrice": 500000,
+          "discPrice": 0,
+          "quantity": 1,
+          "productImage": "https://cdn-m2.fabelio.com/catalog/product/f/l/florida_green_1.jpg?auto=format&h=640&ixlib=react-9.0.3"
+        }
+      ],
+      "id": 6
+    },
+    {
+      "idUser": "5",
+      "status": "unpaid",
+      "history": {
+        "unpaidAt": "11-Mar-2021 09:51:00",
+        "paidAt": null
+      },
+      "totalPrice": 640000,
+      "totalWeight": 3000,
+      "detail": [
+        {
+          "productName": "TV Table HAUGA",
+          "productPrice": 800000,
+          "discPrice": 20,
+          "quantity": 1,
+          "productImage": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/492/0949272_PE799595_S4.jpg"
+        }
+      ],
+      "id": 7
+    },
+    {
+      "idUser": "5",
+      "status": "unpaid",
+      "history": {
+        "unpaidAt": "11-Mar-2021 10:08:05",
+        "paidAt": null
+      },
+      "totalPrice": 7000000,
+      "totalWeight": 15000,
+      "detail": [
+        {
+          "productName": "Sofa Set 3 Seater HUGHES",
+          "productPrice": 7000000,
+          "discPrice": 0,
+          "quantity": 1,
+          "productImage": "https://cdn-m2.fabelio.com/catalog/product/s/o/sofa3d_hughes_tigerlily_1_21_hires.jpg?auto=format&w=1678&ixlib=react-9.0.3"
+        }
+      ],
+      "id": 8
+    },
+    {
+      "idUser": "5",
+      "status": "paid",
+      "history": {
+        "unpaidAt": "11-Mar-2021 10:08:43",
+        "paidAt": "11-Mar-2021 10:09:13"
+      },
+      "totalPrice": 2500000,
+      "totalWeight": 35000,
+      "detail": [
+        {
+          "productName": "Coffee Table HAVSTA",
+          "productPrice": 2500000,
+          "discPrice": 0,
+          "quantity": 1,
+          "productImage": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/355/0735538_PE739987_S4.jpg"
+        }
+      ],
+      "id": 9
     }
-  ],
-  "transactions": []
+  ]
 }

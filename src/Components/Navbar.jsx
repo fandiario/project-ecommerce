@@ -33,9 +33,11 @@ class Navbar extends React.Component {
         emailPhoneValid: null,
         passwordValid: null,
         currentTotalCarts: 0,
-        eyeCon: true
+        eyeCon: true,
+        
     }
 
+    
     getUsername = () => {
         let idUser = localStorage.getItem ("id")
 
@@ -308,17 +310,27 @@ class Navbar extends React.Component {
                                                 }
                                             </DropdownItem>
                                             <DropdownItem>
+                                                {/* <span>
+                                                    <Link to={`/user-profile/${localStorage.getItem ("id")}`} className="furniture-link" disable aria-disabled={(localStorage.getItem("id") === null ? true : false)}>
+                                                        <FontAwesomeIcon icon={faCog} className="mr-1" ></FontAwesomeIcon>
+                                                        User Profile
+                                                    </Link>
+                                                </span> */}
+                                                          
                                                 {
                                                     localStorage.getItem ("id") ? 
                                                         <span>
-                                                            <FontAwesomeIcon icon={faCog} className="mr-1" ></FontAwesomeIcon>
-                                                            Edit User
+                                                            <Link to={`/user-profile/${localStorage.getItem ("id")}/user-setting`} className="furniture-link">
+                                                                <FontAwesomeIcon icon={faCog} className="mr-1" ></FontAwesomeIcon>
+                                                                User Profile
+                                                            </Link>
                                                         </span>
                                                           
                                                     : 
                                                         null
                                                 }
                                             </DropdownItem>
+                                            
                                             <DropdownItem>
                                                 {
                                                     localStorage.getItem ("id") ? 

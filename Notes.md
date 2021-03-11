@@ -57,3 +57,25 @@ Senin 8 Mar
 = Buat supaya password bisa dilihat
 = Buat Payment page
 
+
+Selasa 9 Mar
+= Buat layout payment Page
+= Buat data to send ke payment : 
+=   {
+      "id" : 1,
+      "status": "unpaid",
+      "createdAt": "2021-3-9 10:22",
+      "totalPrice": 50000,
+      "detailItems": [
+        
+      ]
+    }
+= Buat supaya tombol add to cart tak muncul bila id = null di detail product
+= Buat supaya tombol proceed di transaction disable saat transaction adalah null  
+= Buat update stock di cart page dan cancel di payment page
+= Bila sudah selesai bayar, lanjut ke timeline user-profile
+= buat page user-profile yg berisi timeline profile, transaction, address
+= timeline transaction bila diklik detail transaksi muncul seperti modal
+
+
+
